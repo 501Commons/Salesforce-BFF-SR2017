@@ -1,0 +1,7 @@
+project:
+    name: Salesforce-BFF-SR2017
+    package:
+        name:  Salesforce-BFF-SR2017
+        api_version: '42.0'
+
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>SR_Letterhead</letterhead>
+    <name>SR Registration New</name>
+    <style>freeForm</style>
+    <subject>Students Rebuild Registration - Welcome!</subject>
+    <textOnly>Hi {!CampaignMember.FirstName},
+
+Welcome to Students Rebuild and our global community!
+
+By signing up for the Ocean Challenge you have joined tens of thousands of teams that have helped impact global issues since 2010.
+
+Ready to dive in but not sure where to start? All the resources you need to get going can be found online on the Ocean Challenge Resource page (http://www.studentsrebuild.org/resources). From our Leader Guide with in-depth Challenge details, to new Teaching Guides based on the time you have, to special videos—we&apos;ve created all these tools with you in mind.
+
+You can also share photos of the sea creatures you make on social media using #SROCEAN (and make sure to tag @StudentsRebuild). We&apos;d love to see them!
+
+Have a question about the Challenge? Find the answer here (http://www.studentsrebuild.org/ocean-faq) or email us (info@studentsrebuild.org.
+
+We&apos;re so happy you&apos;ve joined us.
+
+The Students Rebuild Team
+
+
+Registration Form Details
+{!CampaignMember.SR_FormData__c}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

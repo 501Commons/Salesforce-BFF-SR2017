@@ -1,0 +1,84 @@
+<apex:page id="SR_Registration" showHeader="false">
+
+  <style> 
+  
+     body { 
+       background-color: #FFF; 
+       font: 16px/1.4em "Helvetica Neue",Helvetica,Arial,sans-serif;
+       line-height: 20.8px;
+    } 
+    
+    input, textarea, select, button {
+       font: 16px/1.4em "Helvetica Neue",Helvetica,Arial,sans-serif;
+       line-height: 20.8px;
+    }
+    
+    body .bPageBlock, body #bodyCell .bResource .secondaryPalette, body .secondaryPalette.bPageBlock, body .individualPalette .secondaryPalette.bPageBlock, body .bodyDiv .genericTable, body .genericPageBlockTable, body .bodyDiv .bSubBlock, body .bComponentBlock .bPageBlock, body .bMyDashboard .bPageBlock, body.rlHoverFrame .bPageBlock, body.subjectSelectionPopup div.choicesBox, body.lookupTab .secondaryPalette.bPageBlock, body.popupTab .secondaryPalette.bPageBlock, body.UserTagStatsPage .secondaryPalette.bPageBlock {
+        background: #FFF;
+    }
+
+    .pbButton .FlowFinishBtn
+    {
+      display:none;
+    }
+        
+    .pbButton .FlowNextBtn
+    {
+      display:none;
+    }
+
+    .pbButtonb .FlowFinishBtn
+    {
+      display:none;
+    }
+
+    .pbButtonb .FlowNextBtn
+    {
+      color:#0b7577;
+      text-align:center;
+    }
+    
+</style>
+
+  <flow:interview name="Registration"/>
+  
+  <script type="text/javascript">
+    
+        function CheckFields()
+        {
+          <!-- Check Role -->
+          SetShowHideState('Screen_Role', 'Screen_Role_Other', 'Roles.Choice6');
+
+          <!-- Check Hear About -->
+          SetShowHideState('Screen_HearAbout', 'Screen_HearAbout_Other', 'HearAbout.Choice2', 'HearAbout.Choice8', 'HearAbout.Choice9', 'HearAbout.Choice12');
+
+          <!-- Check Org Type -->
+          SetShowHideState('Screen_Organization_Type', 'Screen_Organization_Type_Other', 'OrganizationTypes.Choice5');
+
+          <!-- Check Org SubType -->
+          SetShowHideState('Screen_OrgSubType', 'Screen_OrgSubType_Other', 'OrgSubTypes.Choice14');
+          
+          <!-- Check Country -->
+          SetShowHideState('Screen_Country', 'Screen_StateProvince', 'Countries.Choice1', 'Countries.Choice2');
+        }
+        
+        function SetShowHideState(field, otherfield, comparevalue1, comparevalue2, comparevalue3, comparevalue4)
+        {
+          var inputField = document.getElementById('SR_Registration:j_id1:i:f:pb:d:' + field + '.input');
+          var valueField = inputField.value;
+          var inputFieldOther = document.getElementById('SR_Registration:j_id1:i:f:pb:d:' + otherfield + '.input');
+          if (valueField.localeCompare(comparevalue1) == 0
+              || valueField.localeCompare(comparevalue2) == 0
+              || valueField.localeCompare(comparevalue3) == 0
+              || valueField.localeCompare(comparevalue4) == 0) {
+             inputFieldOther.style.display = 'block' 
+          }
+          else {
+              inputFieldOther.style.display = 'none'
+          }
+        }
+        
+        var checkTimer = setInterval(CheckFields, 250);
+  </script>  
+    
+</apex:page>

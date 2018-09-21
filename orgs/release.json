@@ -1,0 +1,10 @@
+{
+  "orgName": "Salesforce-BFF-SR2017 - Release Test Org",
+  "edition": "Enterprise",
+  "orgPreferences" : {
+    "enabled": [
+      "S1DesktopEnabled",
+      "ChatterEnabled"
+    ]
+  }
+}

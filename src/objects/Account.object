@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Org_Sub_Type_Other__c</fullName>
+        <externalId>false</externalId>
+        <label>Org Sub-Type Other</label>
+        <length>64</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Org_Sub_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Org Sub-Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Org_Type__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>-- Select One --</fullName>
+                    <default>true</default>
+                    <label>-- Select One --</label>
+                </value>
+                <value>
+                    <fullName>CBO - Children / Youth Program</fullName>
+                    <default>false</default>
+                    <label>CBO - Children / Youth Program</label>
+                </value>
+                <value>
+                    <fullName>CBO - Faith-Based Organization</fullName>
+                    <default>false</default>
+                    <label>CBO - Faith-Based Organization</label>
+                </value>
+                <value>
+                    <fullName>CBO - Library / Museum</fullName>
+                    <default>false</default>
+                    <label>CBO - Library / Museum</label>
+                </value>
+                <value>
+                    <fullName>CBO - Service Club</fullName>
+                    <default>false</default>
+                    <label>CBO - Service Club</label>
+                </value>
+                <value>
+                    <fullName>Individual / Family</fullName>
+                    <default>false</default>
+                    <label>Individual / Family</label>
+                </value>
+                <value>
+                    <fullName>College/University</fullName>
+                    <default>false</default>
+                    <label>School - College/University</label>
+                </value>
+                <value>
+                    <fullName>School District</fullName>
+                    <default>false</default>
+                    <label>School - District</label>
+                </value>
+                <value>
+                    <fullName>Elementary School</fullName>
+                    <default>false</default>
+                    <label>School - Elementary</label>
+                </value>
+                <value>
+                    <fullName>High School</fullName>
+                    <default>false</default>
+                    <label>School - High School</label>
+                </value>
+                <value>
+                    <fullName>Jr. High / Middle School</fullName>
+                    <default>false</default>
+                    <label>School - Jr. High / Middle</label>
+                </value>
+                <value>
+                    <fullName>School - Library</fullName>
+                    <default>false</default>
+                    <label>School - Library</label>
+                </value>
+                <value>
+                    <fullName>Other School</fullName>
+                    <default>false</default>
+                    <label>School - Other</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Org_Type_Other__c</fullName>
+        <externalId>false</externalId>
+        <label>Org Type Other</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Org_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Org Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>-- Select One --</fullName>
+                    <default>true</default>
+                    <label>-- Select One --</label>
+                </value>
+                <value>
+                    <fullName>School</fullName>
+                    <default>false</default>
+                    <label>School</label>
+                </value>
+                <value>
+                    <fullName>Individual / Family</fullName>
+                    <default>false</default>
+                    <label>Individual / Family</label>
+                </value>
+                <value>
+                    <fullName>Community-Based Organization</fullName>
+                    <default>false</default>
+                    <label>Community-Based Organization</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+</CustomObject>

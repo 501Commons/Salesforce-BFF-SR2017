@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>SR_Letterhead</letterhead>
+    <name>SR Digital Submission</name>
+    <style>freeForm</style>
+    <subject>Students Rebuild Submission</subject>
+    <textOnly>Hi {!Contact.FirstName},
+
+
+
+Thanks for submitting your final numbers to Students Rebuild! We&apos;re so grateful you and your team took part in the Students Rebuild Challenge.
+
+
+
+We&apos;re excited to see your self-portraits arrive in the mail or receive the digital images! Print this email which is your submission slip to include if you&apos;re mailing your items to Students Rebuild at:
+
+Students Rebuild
+
+2400 1st Ave South #336
+
+Seattle, WA 98134
+
+
+
+Now, it&apos;s time to celebrate your team&apos;s hard work. A Participation Certificate is available for you to distribute to all your team members on our Challenge Resources page.
+
+
+
+Please continue to utilize the learning resources and, if you&apos;d like, create additional self-portraits for submission.
+
+
+
+Once the Challenge ends on May 4th, 2018, be on the lookout for a final survey and our Student Impact Report. We&apos;ll be sure to email both to you!
+
+
+
+Have a question about the Challenge? Find the answer here or email us.
+
+Thanks again,
+
+The Students Rebuild Team
+
+Submission Details
+{!Contact.Students_Rebuild_Info__c}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
