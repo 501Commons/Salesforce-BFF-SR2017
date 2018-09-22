@@ -1,4 +1,4 @@
-<apex:page id="SR_Registration" showHeader="false">
+<apex:page id="SR_Registration" showHeader="false" standardController="Account">
 
   <style> 
   
@@ -42,6 +42,12 @@
 
   <flow:interview name="Registration"/>
   
+  <apex:form style="display:none" >
+    <apex:inputField value="{!Account.C501_Students_Rebuild_Org_Type__c}" id="category"/>
+    <apex:inputField id="subcategory" value="{!Account.C501_Students_Rebuild_Org_Sub_Type__c}"/>
+  </apex:form>
+
+
   <script type="text/javascript">
     
         function CheckFields()
@@ -60,6 +66,9 @@
           
           <!-- Check Country -->
           SetShowHideState('Screen_Country', 'Screen_StateProvince', 'Countries.Choice1', 'Countries.Choice2');
+
+          <!-- Check Dependent Fields -->
+          SetDependencyField('category', 'subcategory', 'Screen_Organization_Type', 'Screen_OrgSubType');
         }
         
         function SetShowHideState(field, otherfield, comparevalue1, comparevalue2, comparevalue3, comparevalue4)
@@ -71,14 +80,80 @@
               || valueField.localeCompare(comparevalue2) == 0
               || valueField.localeCompare(comparevalue3) == 0
               || valueField.localeCompare(comparevalue4) == 0) {
-             inputFieldOther.style.display = 'block' 
+             inputFieldOther.style.display = 'block';
           }
           else {
-              inputFieldOther.style.display = 'none'
+              inputFieldOther.style.display = 'none';
+          }
+        }
+
+        function SetDependencyField(controllingFieldVF, dependentFieldVF, controllingFieldFlow, dependentFieldFlow)
+        {
+          var inputControllingFieldVF = document.getElementById('{!$CurrentPage.Name}:j_id8:' + controllingFieldVF);
+          if (inputControllingFieldVF == null) { return; }
+          var inputDependentFieldVF = document.getElementById('{!$CurrentPage.Name}:j_id8:' + dependentFieldVF);
+          if (inputDependentFieldVF == null) { return; }
+
+          var inputControllingFieldFlow = document.getElementById('{!$CurrentPage.Name}:j_id1:i:f:pb:d:' + controllingFieldFlow + '.input');
+          if (inputControllingFieldFlow == null) { return; }
+          var inputDependentFieldFlow = document.getElementById('{!$CurrentPage.Name}:j_id1:i:f:pb:d:' + dependentFieldFlow + '.input');
+          if (inputDependentFieldFlow == null) { return; }
+          var inputDependentFieldFlowTemp = document.getElementById('{!$CurrentPage.Name}:j_id1:i:f:pb:d:' + dependentFieldFlow + 'Temp.input');
+          if (inputDependentFieldFlowTemp == null) { return; }
+
+          inputDependentFieldFlow.style.display = 'none';
+          
+          var valueControllingFieldVF = inputControllingFieldVF.options[inputControllingFieldVF.selectedIndex].text;
+          var valueControllingFieldFlow = inputControllingFieldFlow.options[inputControllingFieldFlow.selectedIndex].text;
+          
+          if (valueControllingFieldVF != valueControllingFieldFlow) {
+              inputControllingFieldVF.selectedIndex = inputControllingFieldFlow.selectedIndex + 1;
+              inputControllingFieldVF.onchange();
+              refreshDependent = true;
+              
+              return;
+          }
+           
+          if (refreshDependent) {
+          
+              refreshDependent = false;
+              
+              while (inputDependentFieldFlowTemp.length > 0) {
+                  inputDependentFieldFlowTemp.remove(0);
+              }
+              
+              for (i = 1; i < inputDependentFieldVF.length; i++) {
+
+                  for (j = 0; j < inputDependentFieldFlow.length; j++) {
+              
+                      if (inputDependentFieldFlow.options[j].text == inputDependentFieldVF.options[i].text) {
+                          var cloneOption = inputDependentFieldFlow.options[j].cloneNode(true);
+                          inputDependentFieldFlowTemp.add(cloneOption, i);
+
+                      }
+                  }
+              }
+              
+              return;
+          }
+        
+          var valueDependentFieldFlow = inputDependentFieldFlow.options[inputDependentFieldFlow.selectedIndex].text;
+          var valueDependentFieldFlowTemp = inputDependentFieldFlowTemp.options[inputDependentFieldFlowTemp.selectedIndex].text;
+             
+          if (valueDependentFieldFlow != valueDependentFieldFlowTemp) {
+              for (i = 0; i < inputDependentFieldFlow.length; i++) {
+              
+                  if (valueDependentFieldFlowTemp == inputDependentFieldFlow.options[i].text) {
+                      inputDependentFieldFlow.selectedIndex = i;
+                      
+                      return;
+                  }
+              }
           }
         }
         
         var checkTimer = setInterval(CheckFields, 250);
+        var refreshDependent = false;
   </script>  
     
 </apex:page>

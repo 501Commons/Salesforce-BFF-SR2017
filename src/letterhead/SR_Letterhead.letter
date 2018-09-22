@@ -17,6 +17,7 @@
         <backgroundColor>#FFFFFF</backgroundColor>
         <height>100</height>
         <horizontalAlignment>Center</horizontalAlignment>
+        <logo>BFF_Logos_Letterhead/Students_Rebuild.png</logo>
         <verticalAlignment>Top</verticalAlignment>
     </header>
     <middleLine>
