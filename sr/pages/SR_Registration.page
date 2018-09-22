@@ -56,13 +56,13 @@
           SetShowHideState('Screen_Role', 'Screen_Role_Other', 'Roles.Choice6');
 
           <!-- Check Hear About -->
-          SetShowHideState('Screen_HearAbout', 'Screen_HearAbout_Other', 'HearAbout.Choice2', 'HearAbout.Choice8', 'HearAbout.Choice9', 'HearAbout.Choice12');
+          SetShowHideState('Screen_HearAbout', 'Screen_HearAbout_Other', 'HearAbout.Choice9');
 
           <!-- Check Org Type -->
-          SetShowHideState('Screen_Organization_Type', 'Screen_Organization_Type_Other', 'OrganizationTypes.Choice5');
+          SetShowHideState('Screen_Organization_Type', 'Screen_Organization_Type_Other', 'OrganizationTypes.Choice4');
 
           <!-- Check Org SubType -->
-          SetShowHideState('Screen_OrgSubType', 'Screen_OrgSubType_Other', 'OrgSubTypes.Choice14');
+          SetShowHideState('Screen_OrgSubType', 'Screen_OrgSubType_Other', 'OrgSubTypes.Choice10');
           
           <!-- Check Country -->
           SetShowHideState('Screen_Country', 'Screen_StateProvince', 'Countries.Choice1', 'Countries.Choice2');
@@ -154,6 +154,7 @@
         
         var checkTimer = setInterval(CheckFields, 250);
         var refreshDependent = false;
+        var restoreDefault = true;
   </script>  
     
 </apex:page>
