@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>--Select One--</fullName>
+        <default>true</default>
+        <label>--Select One--</label>
+    </customValue>
+    <customValue>
+        <fullName>Student</fullName>
+        <default>false</default>
+        <label>Student</label>
+    </customValue>
+    <customValue>
+        <fullName>Teacher / Educator</fullName>
+        <default>false</default>
+        <label>Teacher / Educator</label>
+    </customValue>
+    <customValue>
+        <fullName>Youth Activities Coordinator</fullName>
+        <default>false</default>
+        <label>Youth Activities Coordinator</label>
+    </customValue>
+    <customValue>
+        <fullName>Parent</fullName>
+        <default>false</default>
+        <label>Parent</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <masterLabel>Roles</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>
