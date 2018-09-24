@@ -73,9 +73,9 @@
         
         function SetShowHideState(field, otherfield, comparevalue1, comparevalue2, comparevalue3, comparevalue4)
         {
-          var inputField = document.getElementById('SR_Registration:j_id1:i:f:pb:d:' + field + '.input');
+          var inputField = document.getElementById('{!$CurrentPage.Name}:j_id1:i:f:pb:d:' + field + '.input');
           var valueField = inputField.value;
-          var inputFieldOther = document.getElementById('SR_Registration:j_id1:i:f:pb:d:' + otherfield + '.input');
+          var inputFieldOther = document.getElementById('{!$CurrentPage.Name}:j_id1:i:f:pb:d:' + otherfield + '.input');
           if (valueField.localeCompare(comparevalue1) == 0
               || valueField.localeCompare(comparevalue2) == 0
               || valueField.localeCompare(comparevalue3) == 0
@@ -89,24 +89,44 @@
 
         function SetDependencyField(controllingFieldVF, dependentFieldVF, controllingFieldFlow, dependentFieldFlow)
         {
-          var inputControllingFieldVF = document.getElementById('{!$CurrentPage.Name}:j_id8:' + controllingFieldVF);
-          if (inputControllingFieldVF == null) { return; }
-          var inputDependentFieldVF = document.getElementById('{!$CurrentPage.Name}:j_id8:' + dependentFieldVF);
-          if (inputDependentFieldVF == null) { return; }
-
-          var inputControllingFieldFlow = document.getElementById('{!$CurrentPage.Name}:j_id1:i:f:pb:d:' + controllingFieldFlow + '.input');
-          if (inputControllingFieldFlow == null) { return; }
+          // Get default helper text
+          var inputDefaultOrgTypeFlow = document.getElementById('{!$CurrentPage.Name}:j_id1:i:f:pb:d:' + 'Screen_Default_Org_Type.input');
+          if (inputDefaultOrgTypeFlow == null) { return; }
+          inputDefaultOrgTypeFlow.style.display = 'none';
+          var inputDefaultOrgSubTypeFlow = document.getElementById('{!$CurrentPage.Name}:j_id1:i:f:pb:d:' + 'Screen_Default_Org_Sub_Type.input');
+          if (inputDefaultOrgSubTypeFlow == null) { return; }
+          inputDefaultOrgSubTypeFlow.style.display = 'none';
+          
+          // Get Dependent elements
           var inputDependentFieldFlow = document.getElementById('{!$CurrentPage.Name}:j_id1:i:f:pb:d:' + dependentFieldFlow + '.input');
           if (inputDependentFieldFlow == null) { return; }
+          inputDependentFieldFlow.style.display = 'none';
+
           var inputDependentFieldFlowTemp = document.getElementById('{!$CurrentPage.Name}:j_id1:i:f:pb:d:' + dependentFieldFlow + 'Temp.input');
           if (inputDependentFieldFlowTemp == null) { return; }
-
-          inputDependentFieldFlow.style.display = 'none';
+          var inputDependentFieldVF = document.getElementById('{!$CurrentPage.Name}:j_id8:' + dependentFieldVF);
+          if (inputDependentFieldVF == null) { return; }
+        
+          // Get Controlling elements
+          var inputControllingFieldVF = document.getElementById('{!$CurrentPage.Name}:j_id8:' + controllingFieldVF);
+          if (inputControllingFieldVF == null) { return; }
+          var inputControllingFieldFlow = document.getElementById('{!$CurrentPage.Name}:j_id1:i:f:pb:d:' + controllingFieldFlow + '.input');
+          if (inputControllingFieldFlow == null) { return; }
           
           var valueControllingFieldVF = inputControllingFieldVF.options[inputControllingFieldVF.selectedIndex].text;
           var valueControllingFieldFlow = inputControllingFieldFlow.options[inputControllingFieldFlow.selectedIndex].text;
           
           if (valueControllingFieldVF != valueControllingFieldFlow) {
+          
+              for (j = 1; j < inputControllingFieldVF.length; j++) {
+      
+                  if (inputControllingFieldVF.options[j].text == inputDefaultOrgTypeFlow.value) {
+                  
+                      inputControllingFieldFlow.selectedIndex = j - 1;
+                      break;
+                  }
+              }
+              
               inputControllingFieldVF.selectedIndex = inputControllingFieldFlow.selectedIndex + 1;
               inputControllingFieldVF.onchange();
               refreshDependent = true;
@@ -127,9 +147,18 @@
                   for (j = 0; j < inputDependentFieldFlow.length; j++) {
               
                       if (inputDependentFieldFlow.options[j].text == inputDependentFieldVF.options[i].text) {
+                      
                           var cloneOption = inputDependentFieldFlow.options[j].cloneNode(true);
                           inputDependentFieldFlowTemp.add(cloneOption, i);
 
+                          if (setOrgSubTypeDefault) {
+                          
+                              setOrgSubTypeDefault = false;
+                              if (inputDefaultOrgSubTypeFlow.value == inputDependentFieldVF.options[i].text) {
+                              
+                                  inputDependentFieldFlowTemp.selectedIndex = i;
+                              }
+                          }
                       }
                   }
               }
@@ -152,8 +181,9 @@
           }
         }
         
-        var checkTimer = setInterval(CheckFields, 250);
+        var checkTimer = setInterval(CheckFields, 100);
         var refreshDependent = false;
+        var setOrgSubTypeDefault = true;
   </script>  
     
 </apex:page>
