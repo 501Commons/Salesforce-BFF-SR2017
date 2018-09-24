@@ -2,31 +2,31 @@
 <Letterhead xmlns="http://soap.sforce.com/2006/04/metadata">
     <available>true</available>
     <backgroundColor>#CCCCCC</backgroundColor>
-    <bodyColor>#FFFFFF</bodyColor>
+    <bodyColor>#CCCCCC</bodyColor>
     <bottomLine>
-        <color>#AAAAFF</color>
-        <height>5</height>
+        <color>#26D07C</color>
+        <height>3</height>
     </bottomLine>
     <footer>
-        <backgroundColor>#FFFFFF</backgroundColor>
-        <height>100</height>
+        <backgroundColor>#CCCCCC</backgroundColor>
+        <height>40</height>
         <horizontalAlignment>Left</horizontalAlignment>
         <verticalAlignment>Top</verticalAlignment>
     </footer>
     <header>
-        <backgroundColor>#FFFFFF</backgroundColor>
-        <height>100</height>
+        <backgroundColor>#CCCCCC</backgroundColor>
+        <height>80</height>
         <horizontalAlignment>Center</horizontalAlignment>
-        <logo>BFF_Logos_Letterhead/Students_Rebuild.png</logo>
-        <verticalAlignment>Top</verticalAlignment>
+        <logo>BFF_Logos_Letterhead/Students_Rebuild_updated_logo.png</logo>
+        <verticalAlignment>Middle</verticalAlignment>
     </header>
     <middleLine>
-        <color>#AAAAFF</color>
-        <height>5</height>
+        <color>#26D07C</color>
+        <height>3</height>
     </middleLine>
     <name>SR_Letterhead</name>
     <topLine>
-        <color>#AAAAFF</color>
-        <height>5</height>
+        <color>#26d07c</color>
+        <height>3</height>
     </topLine>
 </Letterhead>
