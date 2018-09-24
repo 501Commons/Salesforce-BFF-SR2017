@@ -8,6 +8,7 @@
     </types>
     <types>
         <members>SR_Registration</members>
+        <members>SR_Registration_Sandbox</members>
         <members>SR_Submission</members>
         <members>SR_SubmissionFinished</members>
         <name>ApexPage</name>
