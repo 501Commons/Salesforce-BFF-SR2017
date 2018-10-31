@@ -1,0 +1,39 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<p style="margin: 0px;"><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'>Hi&nbsp;</span><span style='background: white; margin: 0px; font-family: "Calibri Light",sans-serif;'>{!CampaignMember.FirstName},</span></p><p style="margin: 0px;"><span style='background: white; margin: 0px; font-family: "Calibri Light",sans-serif;'><br></span><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'></span></p>
+
+<p style="margin: 0px;"><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'>Thank you for your contribution. We are
+so excited to receive your package! It typically takes about 3-4 weeks to
+receive and process each package, but you can expect another message from us
+when we receive your art. </span></p>
+
+<p style="margin: 0px;"><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'>&nbsp;</span></p>
+
+<p style="margin: 0px;"><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'>Please print this email which is your
+submission slip to include if you're mailing your items to Students Rebuild at:</span></p>
+
+<p style="margin: 0px;"><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'>&nbsp;</span></p>
+
+<p style="margin: 0px;"><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'>Students Rebuild</span></p>
+
+<p style="margin: 0px;"><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'>2400 1st Ave South #336</span></p>
+
+<p style="margin: 0px;"><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'>Seattle, WA 98134</span></p><p style="margin: 0px;"><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'><br></span></p>
+
+<p style="margin: 0px;"><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'>Because of the incredible work of your team, we will be donating
+to support ocean health and coastal communities. Check out our </span><span style="margin: 0px;"><span style='margin: 0px; font-family: "Calibri Light",sans-serif;'><a href="https://www.studentsrebuild.org/ocean-partners"><font color="#0000ff">partner page</font></a></span></span><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'> to learn more about the projects you’re helping to fund!</span></p><p style="margin: 0px;"><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'><br></span></p>
+
+<p style="margin: 0px;"><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'>Be sure to celebrate your team's hard work too! A </span><span style="margin: 0px;"><span style='margin: 0px; font-family: "Calibri Light",sans-serif;'><a href="https://www.studentsrebuild.org/sites/default/files/OC_Participation%20Certificate_%20FNL.pdf"><font color="#0000ff">Participation
+Certificate</font></a></span></span><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'> is available for you to share with
+your team. You can also continue to utilize the&nbsp;Ocean Challenge </span><span style="margin: 0px;"><span style='margin: 0px; font-family: "Calibri Light",sans-serif;'><a href="https://www.studentsrebuild.org/ocean-resources"><font color="#0000ff">learning resources</font></a></span></span><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'> and, if you'd like, create additional sea creatures for
+submission all the way up until the Challenge ends on June 8, 2019.&nbsp;</span></p><p style="margin: 0px;"><span style='margin: 0px; color: black; font-family: "Calibri Light",sans-serif;'><br></span></p>
+
+<p style="margin: 0px 0px 19.2px; vertical-align: baseline;"><span style='margin: 0px; font-family: "Calibri Light",sans-serif;'>Thanks again for being part of the Students Rebuild
+global community!</span></p><p style="margin: 0px 0px 19.2px; vertical-align: baseline;"><br></p>
+
+<p style="margin: 0px 0px 19.2px; vertical-align: baseline;"><b><u><span style='margin: 0px; font-family: "Calibri Light",sans-serif;'>Submission Form Details</span></u></b></p><p style="margin: 0px 0px 19.2px; vertical-align: baseline;"><b><u><span style='margin: 0px; font-family: "Calibri Light",sans-serif;'><br></span></u></b><span style='margin: 0px; font-family: "Calibri Light",sans-serif;'></span></p>
+
+<p style="margin: 0px;"><span style='margin: 0px; font-family: "Calibri Light",sans-serif;'>{!CampaignMember.SR_FormData__c}</span><span style='margin: 0px; font-family: "Calibri Light",sans-serif;'><br></span></p>]]></td>
+</tr>
+</table>

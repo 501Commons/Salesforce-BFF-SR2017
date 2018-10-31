@@ -42,13 +42,7 @@
         <members>Contact.SR_Email_Newsletter__c</members>
         <members>Contact.Students_Rebuild_Info__c</members>
         <members>Contact.Students_Rebuild_Team_Name__c</members>
-        <members>SR_Result_Old__c.SR_Number_of_Items__c</members>
-        <members>SR_Result_Old__c.SR_Number_of_Young_People_c__c</members>
         <name>CustomField</name>
-    </types>
-    <types>
-        <members>SR_Result_Old__c</members>
-        <name>CustomObject</name>
     </types>
     <types>
         <members>Students_Rebuild</members>
@@ -56,6 +50,8 @@
         <members>Students_Rebuild/SR_Registration_Existing</members>
         <members>Students_Rebuild/SR_Registration_New</members>
         <members>Students_Rebuild/SR_Submission</members>
+        <members>Students_Rebuild/SR_Submission_Digital_Legacy</members>
+        <members>Students_Rebuild/SR_Submission_Physical_Legacy</members>
         <name>EmailTemplate</name>
     </types>
     <types>
@@ -71,16 +67,8 @@
         <name>GlobalValueSet</name>
     </types>
     <types>
-        <members>SR_Result_Old__c-SR Result Layout</members>
-        <name>Layout</name>
-    </types>
-    <types>
         <members>SR_Letterhead</members>
         <name>Letterhead</name>
-    </types>
-    <types>
-        <members>SR_Result_Old__c.All</members>
-        <name>ListView</name>
     </types>
     <types>
         <members>CampaignMember.SR_Registration_Existing</members>

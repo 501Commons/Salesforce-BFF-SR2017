@@ -1,31 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <actionCalls>
-        <name>Send_Digital_Email</name>
-        <label>Send Digital Email</label>
-        <locationX>336</locationX>
-        <locationY>1159</locationY>
-        <actionName>CampaignMember.SR_Submission_Digital_Legacy_Email_Alert</actionName>
+        <name>Send_Email</name>
+        <label>Send Email</label>
+        <locationX>280</locationX>
+        <locationY>1157</locationY>
+        <actionName>CampaignMember.SR_Submission</actionName>
         <actionType>emailAlert</actionType>
         <connector>
-            <targetReference>Finish_Digital</targetReference>
-        </connector>
-        <inputParameters>
-            <name>SObjectRowId</name>
-            <value>
-                <elementReference>soMember.Id</elementReference>
-            </value>
-        </inputParameters>
-    </actionCalls>
-    <actionCalls>
-        <name>Send_Physical_Email</name>
-        <label>Send Physical Email</label>
-        <locationX>251</locationX>
-        <locationY>1266</locationY>
-        <actionName>CampaignMember.SR_Submission_Physical_Legacy_Email_Alert</actionName>
-        <actionType>emailAlert</actionType>
-        <connector>
-            <targetReference>Finish_Physical</targetReference>
+            <targetReference>Update_Body_Finish</targetReference>
         </connector>
         <inputParameters>
             <name>SObjectRowId</name>
@@ -37,53 +20,17 @@
     <assignments>
         <name>Build_SR_History</name>
         <label>Build SR History</label>
-        <locationX>62</locationX>
-        <locationY>489</locationY>
+        <locationX>82</locationX>
+        <locationY>808</locationY>
         <assignmentItems>
             <assignToReference>varSRResultHistory</assignToReference>
             <operator>Add</operator>
             <value>
-                <elementReference>BuildSRResultHistory</elementReference>
+                <elementReference>BuildSRHistory</elementReference>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Update_Total</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Clear_Return_Path</name>
-        <label>Clear Return Path</label>
-        <locationX>435</locationX>
-        <locationY>1006</locationY>
-        <assignmentItems>
-            <assignToReference>varReturnPath</assignToReference>
-            <operator>Assign</operator>
-        </assignmentItems>
-        <connector>
-            <targetReference>Challenge_Type</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Clear_Total</name>
-        <label>Clear Total</label>
-        <locationX>438</locationX>
-        <locationY>667</locationY>
-        <assignmentItems>
-            <assignToReference>soMember.SR_Number_of_Items__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <numberValue>0.0</numberValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>soMember.SR_Number_of_Young_People__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <numberValue>0.0</numberValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Start_Build_SR_History</targetReference>
+            <targetReference>SR_History</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -126,72 +73,43 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Set_Digital_Results</name>
-        <label>Set Digital Results</label>
-        <locationX>1016</locationX>
-        <locationY>1028</locationY>
+        <description>Bug in Flow where the validate on the results wasn&apos;t working.</description>
+        <name>Set_Error</name>
+        <label>Set Error</label>
+        <locationX>1187</locationX>
+        <locationY>800</locationY>
         <assignmentItems>
-            <assignToReference>soResult.SR_Number_of_Items__c</assignToReference>
+            <assignToReference>varErrorResults</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Screen_TotalItems_Digital</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>soResult.SR_Number_of_Young_People__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Screen_Total_Young_People_Digital</elementReference>
+                <stringValue>Error: Result must be larger than 0 and larger than the previous value.</stringValue>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Create_SR_Result</targetReference>
+            <targetReference>Screen_Challenge</targetReference>
         </connector>
     </assignments>
     <assignments>
-        <name>Set_Physical_Results</name>
-        <label>Set Physical Results</label>
-        <locationX>1272</locationX>
-        <locationY>953</locationY>
+        <name>Set_Outputs</name>
+        <label>Set Outputs</label>
+        <locationX>1176</locationX>
+        <locationY>674</locationY>
         <assignmentItems>
-            <assignToReference>soResult.SR_Number_of_Items__c</assignToReference>
+            <assignToReference>varOutputMemberId</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Screen_TotalItems_Physical</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>soResult.SR_Number_of_Young_People__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Screen_Total_Young_People_Physical</elementReference>
+                <elementReference>soMember.Id</elementReference>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Create_SR_Result</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Set_Return_Path</name>
-        <label>Set Return Path</label>
-        <locationX>619</locationX>
-        <locationY>828</locationY>
-        <assignmentItems>
-            <assignToReference>varReturnPath</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>Screen_Challenge</stringValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Get_SR_History</targetReference>
+            <targetReference>Get_Organization</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Set_Return_Url</name>
         <label>Set Return Url</label>
-        <locationX>976</locationX>
-        <locationY>410</locationY>
+        <locationX>979</locationX>
+        <locationY>505</locationY>
         <assignmentItems>
             <assignToReference>varOutputReturnUrl</assignToReference>
             <operator>Assign</operator>
@@ -204,19 +122,26 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Start_Build_SR_History</name>
-        <label>Start Build SR History</label>
-        <locationX>265</locationX>
-        <locationY>654</locationY>
+        <name>Update_Body_Finish</name>
+        <label>Finish Log</label>
+        <locationX>592</locationX>
+        <locationY>1158</locationY>
         <assignmentItems>
-            <assignToReference>varSRResultHistory</assignToReference>
-            <operator>Assign</operator>
+            <assignToReference>varTaskDescription</assignToReference>
+            <operator>Add</operator>
             <value>
-                <elementReference>textResultHistoryStart</elementReference>
+                <elementReference>FlowMessage</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskDescription</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>-Finish</stringValue>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>SR_Results_History</targetReference>
+            <targetReference>Logging_0_0</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -265,45 +190,6 @@
             <targetReference>Logging_0</targetReference>
         </connector>
     </assignments>
-    <assignments>
-        <name>Update_Total</name>
-        <label>Update Total</label>
-        <locationX>234</locationX>
-        <locationY>489</locationY>
-        <assignmentItems>
-            <assignToReference>soMember.SR_Number_of_Items__c</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <elementReference>soResult.SR_Number_of_Items__c</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>soMember.SR_Number_of_Young_People__c</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <elementReference>soResult.SR_Number_of_Young_People__c</elementReference>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>SR_Results_History</targetReference>
-        </connector>
-    </assignments>
-    <choices>
-        <name>Digital_Items</name>
-        <choiceText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Email photos&lt;/FONT&gt;&lt;/DIV&gt;</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>Screen_Digital_Items</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>Physical_Items</name>
-        <choiceText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Mail art&lt;/FONT&gt;&lt;/DIV&gt;</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>Screen_Physical_Items</stringValue>
-        </value>
-    </choices>
     <constants>
         <name>constLine</name>
         <dataType>String</dataType>
@@ -311,56 +197,6 @@
             <stringValue>__________________________________________________</stringValue>
         </value>
     </constants>
-    <decisions>
-        <name>Challenge_Selection_Type</name>
-        <label>Challenge Selection Type</label>
-        <locationX>766</locationX>
-        <locationY>1183</locationY>
-        <defaultConnector>
-            <targetReference>Screen_Challenge_Digital</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Digital Items</defaultConnectorLabel>
-        <rules>
-            <name>Physical_Items_Selected</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Physical_Items</leftValueReference>
-                <operator>WasSelected</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Screen_Challenge_Physical</targetReference>
-            </connector>
-            <label>Physical Items Selected</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <name>Challenge_Selection_Type_0</name>
-        <label>Challenge Selection Type</label>
-        <locationX>119</locationX>
-        <locationY>1100</locationY>
-        <defaultConnector>
-            <targetReference>Send_Digital_Email</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Digital Items</defaultConnectorLabel>
-        <rules>
-            <name>Physical_Items_Selected_0</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Physical_Items</leftValueReference>
-                <operator>WasSelected</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Send_Physical_Email</targetReference>
-            </connector>
-            <label>Physical Items Selected</label>
-        </rules>
-    </decisions>
     <decisions>
         <name>Check_Overrides</name>
         <label>Use Overrides</label>
@@ -394,60 +230,10 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Check_Return_Path</name>
-        <label>Check Return Path</label>
-        <locationX>116</locationX>
-        <locationY>1002</locationY>
-        <defaultConnector>
-            <targetReference>Challenge_Selection_Type_0</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Other</defaultConnectorLabel>
-        <rules>
-            <name>Path_Screen_Challenge</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>varReturnPath</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>Screen_Challenge</stringValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Clear_Return_Path</targetReference>
-            </connector>
-            <label>Path_Screen_Challenge</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <name>Create_Team</name>
-        <label>Create Team</label>
-        <locationX>783</locationX>
-        <locationY>618</locationY>
-        <defaultConnector>
-            <targetReference>Update_Team_Name</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>No</defaultConnectorLabel>
-        <rules>
-            <name>Yes_Create_Team</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>varTeamId</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Create_New_Team</targetReference>
-            </connector>
-            <label>Yes</label>
-        </rules>
-    </decisions>
-    <decisions>
         <name>Existing_Contact</name>
         <label>Existing Contact NotUnique</label>
-        <locationX>778</locationX>
-        <locationY>408</locationY>
+        <locationX>774</locationX>
+        <locationY>421</locationY>
         <defaultConnector>
             <targetReference>Set_Return_Url</targetReference>
         </defaultConnector>
@@ -463,32 +249,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Get_Member</targetReference>
-            </connector>
-            <label>Yes</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <name>Existing_Member</name>
-        <label>Existing Member</label>
-        <locationX>974</locationX>
-        <locationY>521</locationY>
-        <defaultConnector>
-            <targetReference>Set_Return_Url</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>No</defaultConnectorLabel>
-        <rules>
-            <name>Yes_Existing_Member</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>varOutputMemberId</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Get_Team</targetReference>
+                <targetReference>Search_Existing_Members</targetReference>
             </connector>
             <label>Yes</label>
         </rules>
@@ -543,7 +304,114 @@
             <label>Yes</label>
         </rules>
     </decisions>
-    <description>DaveB: Fixes for Team Name, PDF Button, and Error</description>
+    <decisions>
+        <name>Logging_0_0</name>
+        <label>Logging</label>
+        <locationX>775</locationX>
+        <locationY>1158</locationY>
+        <defaultConnector>
+            <targetReference>Finished_Submission</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Logging_0_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>varLogEnabled</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Log_Update_0_0</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Result_Field</name>
+        <label>Result Field</label>
+        <locationX>281</locationX>
+        <locationY>654</locationY>
+        <defaultConnector>
+            <targetReference>SR_History</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_ResultField</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>soSRResultHistory.Field</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>SR_Number</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SR_History_Lookup</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Valid_Results</name>
+        <label>Valid Results</label>
+        <locationX>1185</locationX>
+        <locationY>926</locationY>
+        <defaultConnector>
+            <targetReference>Set_Error</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_ValidResults</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Screen_TotalItems</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <elementReference>soMember.SR_Number_of_Items__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Screen_TotalItems</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_SR_Result</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Valid_SR_Result</name>
+        <label>Valid SR Result</label>
+        <locationX>779</locationX>
+        <locationY>926</locationY>
+        <defaultConnector>
+            <targetReference>Create_SR_Result</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_ValidSRResult</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>varSRResultId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_SR_Result</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <description>Kasey update PDF copy</description>
     <dynamicChoiceSets>
         <name>Countries</name>
         <dataType>Picklist</dataType>
@@ -630,9 +498,9 @@
 {!soContact.FirstName} + &quot; &quot; + {!soContact.LastName} + &quot;&lt;br&gt;&quot; +
 {!soMember.Email} + &quot;&lt;br&gt;&quot; +
 &quot;Team: &quot; + {!soMember.SR_Team_Name__c} + &quot;&lt;br&gt;&quot; +
-&quot;Organization: &quot; + {!soMember.CompanyOrAccount} + &quot;&lt;br&gt;&quot; +
-&quot;Total Items: &quot; + TEXT({!soMember.SR_Number_of_Items__c}) + &quot;&lt;br&gt;&quot; +
-&quot;Total Young People: &quot; + TEXT({!soMember.SR_Number_of_Young_People__c}) + &quot;&lt;br&gt;&quot; +
+&quot;Organization: &quot; + {!soOrganization.Name} + &quot;&lt;br&gt;&quot; +
+&quot;Total Items: &quot; + TEXT({!Screen_TotalItems}) + &quot;&lt;br&gt;&quot; +
+&quot;Total Young People: &quot; + TEXT({!Screen_Total_Young_People}) +
 &quot;&lt;br&gt;&lt;br&gt;&quot; + {!varSRResultHistory}</expression>
     </formulas>
     <formulas>
@@ -641,37 +509,52 @@
         <expression>SUBSTITUTE({!BuildFormData}, &quot;&lt;br&gt;&quot;, &quot;_BR_ENCODED_&quot;)</expression>
     </formulas>
     <formulas>
-        <name>BuildSRResultHistory</name>
+        <name>BuildPDFFormData</name>
         <dataType>String</dataType>
-        <expression>TEXT(DATEVALUE({!soResult.CreatedDate}))
-+ &quot;, # Items:  &quot;
-+ TEXT({!soResult.SR_Number_of_Items__c})
-+ &quot;, # Young People: &quot;
-+ TEXT({!soResult.SR_Number_of_Young_People__c})
-+ &quot;&lt;br&gt;&quot;</expression>
+        <expression>&quot;Hi &quot;</expression>
+    </formulas>
+    <formulas>
+        <name>BuildSRHistory</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(
+LEFT(TEXT({!soSRResultHistory.CreatedDate} ),Find(&quot; &quot;, TEXT({!soSRResultHistory.CreatedDate} ))-1)
+ + &quot; - &quot; +
+&quot;Changed &quot; + 
+TEXT({!soSRResultHistory.Field}) + &quot; to &quot; +
+{!varNewValue} + &quot;&lt;br&gt;&quot;, &quot;_c&quot;, &quot;&quot;), &quot;_&quot;, &quot; &quot;), &quot;.0&quot;, &quot;&quot;)</expression>
     </formulas>
     <formulas>
         <name>FlowMessage</name>
         <dataType>String</dataType>
         <expression>TEXT({!varFlowId}) + &quot; &quot; + {!Screen_Email_Register} + &quot; Flow Registration&quot;</expression>
     </formulas>
-    <formulas>
-        <name>getNewResultName</name>
-        <dataType>String</dataType>
-        <expression>&quot;Result - &quot; + TEXT({!$Flow.CurrentDateTime})</expression>
-    </formulas>
     <interviewLabel>Submission {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Submission</label>
     <loops>
-        <name>SR_Results_History</name>
-        <label>SR Results History</label>
-        <locationX>107</locationX>
-        <locationY>656</locationY>
-        <assignNextValueToReference>soResult</assignNextValueToReference>
-        <collectionReference>soTeamResults</collectionReference>
+        <name>Loop_Existing_Members</name>
+        <label>Loop Existing Members</label>
+        <locationX>1202</locationX>
+        <locationY>410</locationY>
+        <assignNextValueToReference>soMember</assignNextValueToReference>
+        <collectionReference>soCollectionMembers</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
-            <targetReference>Build_SR_History</targetReference>
+            <targetReference>Pick_Existing_Team</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Set_Return_Url</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>SR_History</name>
+        <label>SR History</label>
+        <locationX>277</locationX>
+        <locationY>811</locationY>
+        <assignNextValueToReference>soSRResultHistory</assignNextValueToReference>
+        <collectionReference>soCollectionSRResultHistory</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Result_Field</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
             <targetReference>Update_Member</targetReference>
@@ -712,62 +595,21 @@
         <object>Task</object>
     </recordCreates>
     <recordCreates>
-        <name>Create_New_Team</name>
-        <label>Create New Team</label>
-        <locationX>613</locationX>
-        <locationY>622</locationY>
-        <assignRecordIdToReference>varTeamId</assignRecordIdToReference>
-        <connector>
-            <targetReference>Set_New_Team</targetReference>
-        </connector>
-        <inputAssignments>
-            <field>Leader__c</field>
-            <value>
-                <elementReference>soMember.ContactId</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Name</field>
-            <value>
-                <elementReference>soMember.SR_Team_Name__c</elementReference>
-            </value>
-        </inputAssignments>
-        <object>SR_Team__c</object>
-    </recordCreates>
-    <recordCreates>
         <name>Create_SR_Result</name>
         <label>Create SR Result</label>
-        <locationX>722</locationX>
-        <locationY>939</locationY>
+        <locationX>777</locationX>
+        <locationY>809</locationY>
         <assignRecordIdToReference>varSRResultId</assignRecordIdToReference>
         <connector>
-            <targetReference>Get_SR_History</targetReference>
+            <targetReference>Update_SR_Result</targetReference>
         </connector>
         <inputAssignments>
             <field>Name</field>
             <value>
-                <elementReference>getNewResultName</elementReference>
+                <stringValue>SR Result History</stringValue>
             </value>
         </inputAssignments>
-        <inputAssignments>
-            <field>SR_Number_of_Items__c</field>
-            <value>
-                <elementReference>soResult.SR_Number_of_Items__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>SR_Number_of_Young_People__c</field>
-            <value>
-                <elementReference>soResult.SR_Number_of_Young_People__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>SR_Team__c</field>
-            <value>
-                <elementReference>varTeamId</elementReference>
-            </value>
-        </inputAssignments>
-        <object>SR_Result__c</object>
+        <object>SR_Result_Old__c</object>
     </recordCreates>
     <recordLookups>
         <name>Get_Campaign</name>
@@ -838,114 +680,132 @@
             <assignToReference>soContact.LastName</assignToReference>
             <field>LastName</field>
         </outputAssignments>
-        <sortField>LastModifiedDate</sortField>
-        <sortOrder>Desc</sortOrder>
     </recordLookups>
     <recordLookups>
-        <name>Get_Member</name>
-        <label>Get Member</label>
-        <locationX>781</locationX>
-        <locationY>521</locationY>
-        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <name>Get_Organization</name>
+        <label>Get Organization</label>
+        <locationX>992</locationX>
+        <locationY>690</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Existing_Member</targetReference>
-        </connector>
-        <filters>
-            <field>CampaignId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>soCampaign.Id</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <field>Email</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>Screen_Email_Register</elementReference>
-            </value>
-        </filters>
-        <object>CampaignMember</object>
-        <outputAssignments>
-            <assignToReference>soMember.CompanyOrAccount</assignToReference>
-            <field>CompanyOrAccount</field>
-        </outputAssignments>
-        <outputAssignments>
-            <assignToReference>soMember.ContactId</assignToReference>
-            <field>ContactId</field>
-        </outputAssignments>
-        <outputAssignments>
-            <assignToReference>soMember.Email</assignToReference>
-            <field>Email</field>
-        </outputAssignments>
-        <outputAssignments>
-            <assignToReference>soMember.Id</assignToReference>
-            <field>Id</field>
-        </outputAssignments>
-        <outputAssignments>
-            <assignToReference>varOutputMemberId</assignToReference>
-            <field>Id</field>
-        </outputAssignments>
-        <outputAssignments>
-            <assignToReference>soMember.SR_Team_Name__c</assignToReference>
-            <field>SR_Team_Name__c</field>
-        </outputAssignments>
-        <outputAssignments>
-            <assignToReference>soMember.SR_Team__c</assignToReference>
-            <field>SR_Team__c</field>
-        </outputAssignments>
-        <sortField>LastModifiedDate</sortField>
-        <sortOrder>Desc</sortOrder>
-    </recordLookups>
-    <recordLookups>
-        <name>Get_SR_History</name>
-        <label>Get SR History</label>
-        <locationX>433</locationX>
-        <locationY>876</locationY>
-        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Clear_Total</targetReference>
-        </connector>
-        <filters>
-            <field>SR_Team__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>varTeamId</elementReference>
-            </value>
-        </filters>
-        <object>SR_Result__c</object>
-        <outputReference>soTeamResults</outputReference>
-        <queriedFields>CreatedDate</queriedFields>
-        <queriedFields>SR_Number_of_Items__c</queriedFields>
-        <queriedFields>SR_Number_of_Young_People__c</queriedFields>
-        <sortField>CreatedDate</sortField>
-        <sortOrder>Desc</sortOrder>
-    </recordLookups>
-    <recordLookups>
-        <name>Get_Team</name>
-        <label>Get Team</label>
-        <locationX>978</locationX>
-        <locationY>617</locationY>
-        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Create_Team</targetReference>
+            <targetReference>Screen_Challenge</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Update_Body_Start_0</targetReference>
         </faultConnector>
         <filters>
-            <field>Name</field>
+            <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>soMember.SR_Team_Name__c</elementReference>
+                <elementReference>soMember.AccountAffiliation__c</elementReference>
             </value>
         </filters>
-        <object>SR_Team__c</object>
+        <object>Account</object>
         <outputAssignments>
-            <assignToReference>varTeamId</assignToReference>
-            <field>Id</field>
+            <assignToReference>soOrganization.Name</assignToReference>
+            <field>Name</field>
         </outputAssignments>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_SR_History</name>
+        <label>Get SR History</label>
+        <locationX>442</locationX>
+        <locationY>807</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>SR_History</targetReference>
+        </connector>
+        <filters>
+            <field>ParentId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varSRResultId</elementReference>
+            </value>
+        </filters>
+        <object>SR_Result_Old__History</object>
+        <outputReference>soCollectionSRResultHistory</outputReference>
+        <queriedFields>Field</queriedFields>
+        <queriedFields>OldValue</queriedFields>
+        <queriedFields>NewValue</queriedFields>
+        <queriedFields>CreatedDate</queriedFields>
+        <queriedFields>Id</queriedFields>
         <sortField>CreatedDate</sortField>
         <sortOrder>Desc</sortOrder>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_SR_Result</name>
+        <label>Get SR Result</label>
+        <locationX>995</locationX>
+        <locationY>926</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Valid_SR_Result</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>soMember.SR_Result__c</elementReference>
+            </value>
+        </filters>
+        <object>SR_Result_Old__c</object>
+        <outputAssignments>
+            <assignToReference>varSRResultId</assignToReference>
+            <field>Id</field>
+        </outputAssignments>
+    </recordLookups>
+    <recordLookups>
+        <name>Search_Existing_Members</name>
+        <label>Search Existing Members</label>
+        <locationX>1040</locationX>
+        <locationY>410</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Existing_Members</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Update_Body_Start_0</targetReference>
+        </faultConnector>
+        <filters>
+            <field>CampaignId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varInputCampaignId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Email</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>soContact.Email</elementReference>
+            </value>
+        </filters>
+        <object>CampaignMember</object>
+        <outputReference>soCollectionMembers</outputReference>
+        <queriedFields>Id</queriedFields>
+    </recordLookups>
+    <recordLookups>
+        <description>Bug Workaround - If you try to reference soSRResultHistory.NewValue flow will fault so have to set the value on a variable</description>
+        <name>SR_History_Lookup</name>
+        <label>SR History</label>
+        <locationX>83</locationX>
+        <locationY>653</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Build_SR_History</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>soSRResultHistory.Id</elementReference>
+            </value>
+        </filters>
+        <object>SR_Result_Old__History</object>
+        <outputAssignments>
+            <assignToReference>varNewValue</assignToReference>
+            <field>NewValue</field>
+        </outputAssignments>
     </recordLookups>
     <recordUpdates>
         <name>Log_Update_0</name>
@@ -971,35 +831,41 @@
         <object>Task</object>
     </recordUpdates>
     <recordUpdates>
-        <name>Set_New_Team</name>
-        <label>Set New Team</label>
-        <locationX>617</locationX>
-        <locationY>712</locationY>
+        <name>Log_Update_0_0</name>
+        <label>Log Update</label>
+        <locationX>599</locationX>
+        <locationY>1259</locationY>
         <connector>
-            <targetReference>Set_Return_Path</targetReference>
+            <targetReference>Finished_Submission</targetReference>
         </connector>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>soMember.Id</elementReference>
+                <elementReference>varLogTaskId</elementReference>
             </value>
         </filters>
         <inputAssignments>
-            <field>SR_Team__c</field>
+            <field>Description</field>
             <value>
-                <elementReference>varTeamId</elementReference>
+                <elementReference>varTaskDescription</elementReference>
             </value>
         </inputAssignments>
-        <object>CampaignMember</object>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Completed</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
     </recordUpdates>
     <recordUpdates>
         <name>Update_Member</name>
         <label>Update Member</label>
-        <locationX>105</locationX>
-        <locationY>837</locationY>
+        <locationX>278</locationX>
+        <locationY>1032</locationY>
         <connector>
-            <targetReference>Check_Return_Path</targetReference>
+            <targetReference>Send_Email</targetReference>
         </connector>
         <filters>
             <field>Id</field>
@@ -1015,68 +881,60 @@
             </value>
         </inputAssignments>
         <inputAssignments>
+            <field>SR_Number_of_Items__c</field>
+            <value>
+                <elementReference>Screen_TotalItems</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SR_Number_of_Young_People__c</field>
+            <value>
+                <elementReference>Screen_Total_Young_People</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>SR_PDF_FormData__c</field>
             <value>
                 <elementReference>ttPDFFormData</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>SR_Result__c</field>
+            <value>
+                <elementReference>varSRResultId</elementReference>
+            </value>
+        </inputAssignments>
         <object>CampaignMember</object>
     </recordUpdates>
     <recordUpdates>
-        <name>Update_Team_Name</name>
-        <label>Update Team Name</label>
-        <locationX>779</locationX>
-        <locationY>715</locationY>
+        <name>Update_SR_Result</name>
+        <label>Update SR Result</label>
+        <locationX>613</locationX>
+        <locationY>806</locationY>
         <connector>
-            <targetReference>Set_New_Team</targetReference>
+            <targetReference>Get_SR_History</targetReference>
         </connector>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>varTeamId</elementReference>
+                <elementReference>varSRResultId</elementReference>
             </value>
         </filters>
         <inputAssignments>
-            <field>Name</field>
+            <field>SR_Number_of_Items__c</field>
             <value>
-                <elementReference>soMember.SR_Team_Name__c</elementReference>
+                <elementReference>Screen_TotalItems</elementReference>
             </value>
         </inputAssignments>
-        <object>SR_Team__c</object>
+        <inputAssignments>
+            <field>SR_Number_of_Young_People_c__c</field>
+            <value>
+                <elementReference>Screen_Total_Young_People</elementReference>
+            </value>
+        </inputAssignments>
+        <object>SR_Result_Old__c</object>
     </recordUpdates>
-    <screens>
-        <name>Challenge_Type</name>
-        <label>Challenge Type</label>
-        <locationX>754</locationX>
-        <locationY>1073</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <connector>
-            <targetReference>Challenge_Selection_Type</targetReference>
-        </connector>
-        <fields>
-            <name>Display_Type_Header</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;_serif&quot; STYLE=&quot;font-size:28px&quot; COLOR=&quot;#006666&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Tell us how you’re sending your art!&lt;/B&gt;&lt;FONT STYLE=&quot;font-size:26px&quot;&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Screen_Challenge_Type_Header</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;You can email us photos of your art or mail it to us. We’re happy to get it either way, though if you mail it in, your art will have the opportunity to appear in a culminating exhibit at the end of this year’s Challenge.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Screen_Challenge_Type</name>
-            <choiceReferences>Digital_Items</choiceReferences>
-            <choiceReferences>Physical_Items</choiceReferences>
-            <dataType>String</dataType>
-            <fieldType>RadioButtons</fieldType>
-            <isRequired>false</isRequired>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
     <screens>
         <name>Email</name>
         <label>Email</label>
@@ -1090,7 +948,7 @@
         </connector>
         <fields>
             <name>Welcome_Message1</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;_serif&quot; STYLE=&quot;font-size:28px&quot; COLOR=&quot;#006666&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;&lt;B&gt;Submit your final numbers!&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;_serif&quot; STYLE=&quot;font-size:48px&quot; COLOR=&quot;#0B7577&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;&lt;B&gt;Submit Your Final Numbers!&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1099,8 +957,8 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>Display_Art</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;This is where art turns into action. Fill out our brief form to tell us how many pieces of art you made, and we’ll match every piece with a donation to our partners The Nature Conservancy and Ocean Collectiv’s portfolio of mini-grants. If your team makes additional art, please come back to enter your new numbers.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <name>Welcome_Message3</name>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;This is a brief form that allows you to submit your team&amp;apos;s numbers. If your team makes additional art, please come back to update your totals.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1109,7 +967,8 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>blank_space_1</name>
+            <name>Welcome_Message4</name>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Do you have a question or need help? &lt;A HREF=&quot;mailto:info@studentsrebuild.org?Registration%20Question&quot; TARGET=&quot;_blank&quot;&gt;Contact us.&lt;/A&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1122,15 +981,6 @@
                 <errorMessage>The value you entered doesn&apos;t meet the validation criteria for this input field.</errorMessage>
                 <formulaExpression>REGEX({!Screen_Email_Register},&quot;[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}&quot;)</formulaExpression>
             </validationRule>
-        </fields>
-        <fields>
-            <name>blank_space_2</name>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Welcome_Message4</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Do you have a question or need help? &lt;A HREF=&quot;mailto:info@studentsrebuild.org?Registration%20Question&quot; TARGET=&quot;_blank&quot;&gt;Contact us&lt;/A&gt;!&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -1152,31 +1002,52 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>Finish_Digital</name>
-        <label>Finish Digital</label>
-        <locationX>574</locationX>
-        <locationY>1163</locationY>
+        <name>Finished_Registration_0</name>
+        <label>No Teams</label>
+        <locationX>977</locationX>
+        <locationY>593</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Submission_Message_NoTeam</name>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Sorry, but no teams were found associated with the provided email, {!Screen_Email_Register}.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>DisplayText_Message10</name>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Did you forget to register? If so, you can still register &lt;A HREF=&quot;http://www.studentsrebuild.org/register&quot; TARGET=&quot;_blank&quot;&gt;here&lt;/A&gt;.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Finished_Message4_0</name>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Need some help? &lt;A HREF=&quot;mailto:info@studentsrebuild.org?Registration%20Question&quot; TARGET=&quot;_blank&quot;&gt;Contact us.&lt;/A&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Finished_Submission</name>
+        <label>Finished Submission</label>
+        <locationX>907</locationX>
+        <locationY>1358</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>FinishedText</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;_serif&quot; STYLE=&quot;font-size:26px&quot; COLOR=&quot;#006666&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;&lt;B&gt;Thank you for your contribution! &lt;/B&gt;&lt;FONT STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot;&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Hello &lt;FONT KERNING=&quot;1&quot;&gt;{!soContact.FirstName},&lt;FONT STYLE=&quot;font-size:12px&quot; KERNING=&quot;0&quot;&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
             <name>Finished_Message2</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;We’re so grateful that you and your team took part in the &lt;FONT COLOR=&quot;#006666&quot;&gt;&lt;B&gt;{!soCampaign.Name}&lt;/B&gt;&lt;/FONT&gt; and can’t wait to se your photos. Please email group photos or pictures of select art pieces to us at &lt;A HREF=&quot;mailto: info@studentsrebuild.org&quot; TARGET=&quot;_blank&quot;&gt;info@studentsrebuild.org&lt;/A&gt;.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Thank you for submitting your final numbers to Students Rebuild! We&amp;apos;re so grateful that you and your team took part in the &lt;FONT COLOR=&quot;#0B7577&quot;&gt;&lt;B&gt;{!soCampaign.Name}&lt;/B&gt;&lt;/FONT&gt;. &lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
             <name>DT_Finished4</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Be sure to celebrate your team&amp;apos;s hard work! A &lt;A HREF=&quot;https://www.studentsrebuild.org/sites/default/files/OC_Participation%20Certificate_%20FNL.pdf&quot; TARGET=&quot;_blank&quot;&gt;Participation Certificate&lt;/A&gt; is available for you to share with your team. You can also continue to utilize the Ocean Challenge &lt;A HREF=&quot;https://www.studentsrebuild.org/ocean-resources&quot; TARGET=&quot;_blank&quot;&gt;learning resources&lt;/A&gt; and, if you&amp;apos;d like, create additional sea creatures for submission all the way up until the Challenge ends on June 8, 2019.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Screen_Finish_Digital_Info2</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Thanks again for being part of the Students Rebuild global community!&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;If you plan on mailing in your items, there&amp;apos;s one more step! Select the Print PDF button below for a PDF file of your submission to include in your mailed package. You will also receive an email with your submission details sent to {!Screen_Email_Register} in case you need to print at a later time.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1188,11 +1059,6 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>DisplayText_FormData</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;&lt;B&gt;&lt;U&gt;Registration Form Details&lt;/U&gt;&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;{!BuildFormData}&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>DT_Spacer3</name>
             <fieldType>DisplayText</fieldType>
         </fields>
@@ -1201,202 +1067,79 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>Finished_Message4</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Need some help? &lt;A HREF=&quot;mailto:info@studentsrebuild.org?Registration%20Question&quot; TARGET=&quot;_blank&quot;&gt;Contact us&lt;/A&gt;.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Finish_Physical</name>
-        <label>Finish Physical</label>
-        <locationX>566</locationX>
-        <locationY>1284</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>FinishedText_0</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;_serif&quot; STYLE=&quot;font-size:26px&quot; COLOR=&quot;#006666&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Thank you for your contribution!&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Finished_Message2_0</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;We’re so grateful that you and your team took part in the &lt;FONT COLOR=&quot;#0B7577&quot;&gt;&lt;B&gt;{!soCampaign.Name}&lt;/B&gt;&lt;/FONT&gt; and can’t wait to receive your package of art. It typically takes about 3-4 weeks to receive and process each package, but you can expect another message from us when we receive your art.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>DT_Finished4_0</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Be sure to celebrate your team&amp;apos;s hard work! A &lt;A HREF=&quot;https://www.studentsrebuild.org/sites/default/files/OC_Participation%20Certificate_%20FNL.pdf&quot; TARGET=&quot;_blank&quot;&gt;Participation Certificate&lt;/A&gt; is available for you to share with your team. You can also continue to utilize the Ocean Challenge &lt;A HREF=&quot;https://www.studentsrebuild.org/ocean-resources&quot; TARGET=&quot;_blank&quot;&gt;learning resources&lt;/A&gt; and, if you&amp;apos;d like, create additional sea creatures for submission all the way up until the Challenge ends on June 8, 2019.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Screen_Physical_End_Info</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Please select the Print PDF button below for a PDF file of your submission to include in your package. You will also receive an email with submission details at {!Screen_Email_Register} in case you need to print them at a later time.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Submission_Physical_Thanks</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Thanks again for being a part of the Students Rebuild global community!&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>DT_Spacer1_0</name>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>DT_Spacer2_0</name>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>DisplayText_FormData_0</name>
+            <name>DisplayText_FormData</name>
             <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;&lt;B&gt;&lt;U&gt;Registration Form Details&lt;/U&gt;&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;{!BuildFormData}&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>DT_Spacer3_0</name>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>DT_Spacer4_0</name>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Finished_Message4_1</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Need some help? &lt;A HREF=&quot;mailto:info@studentsrebuild.org?Registration%20Question&quot; TARGET=&quot;_blank&quot;&gt;Contact us&lt;/A&gt;.&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <name>Finished_Message4</name>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Need some help? &lt;A HREF=&quot;mailto:info@studentsrebuild.org?Registration%20Question&quot; TARGET=&quot;_blank&quot;&gt;Contact us.&lt;/A&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>Finished_Registration_0</name>
-        <label>No Teams</label>
-        <locationX>1156</locationX>
-        <locationY>411</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>Submission_Message_NoTeam</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Sorry, we didn’t find a team associated with the provided email: {!Screen_Email_Register}.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>DisplayText_Message10</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;If you haven&amp;apos;t registered yet, you can still do so &lt;A HREF=&quot;http://www.studentsrebuild.org/register&quot; TARGET=&quot;_blank&quot;&gt;here&lt;/A&gt;.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Finished_Message4_0</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;If you have a question or need help, &lt;A HREF=&quot;mailto: info@studentsrebuild.org&quot; TARGET=&quot;_blank&quot;&gt;contact us&lt;/A&gt;!&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Screen_Challenge_Digital</name>
-        <label>Challenge Digital</label>
-        <locationX>1017</locationX>
-        <locationY>1120</locationY>
+        <name>Pick_Existing_Team</name>
+        <label>Pick Existing Team</label>
+        <locationX>1199</locationX>
+        <locationY>555</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Set_Digital_Results</targetReference>
+            <targetReference>Set_Outputs</targetReference>
         </connector>
         <fields>
-            <name>WelcomeText_0</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;_serif&quot; STYLE=&quot;font-size:28px&quot; COLOR=&quot;#006666&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;&lt;B&gt;Please enter your team&amp;apos;s details!&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <name>MultipleTeamsText</name>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Hi There!&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>DisplayText_Message100_0</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Please input the number of participants and pieces of art {!soMember.SR_Team_Name__c} made for the {!soCampaign.Name}.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <name>DisplayText_Message2</name>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Looks like we&amp;apos;ve found these team names associated with your email address for the &lt;FONT COLOR=&quot;#0B7577&quot;&gt;{!soCampaign.Name}&lt;/FONT&gt;!&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>DisplayText_Message101_0</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Returning to this page to submit additional items? View your submission history below and please make sure subsequent submissions contain only the new&lt;I&gt; &lt;/I&gt;numbers of participants and pieces of art as totals are cumulative.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <name>DisplayText_Message33</name>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Please submit final numbers for each team that participates. Go ahead and select a team to continue.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>DT_Message101_0</name>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>DisplayText_FirstName_0</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;First Name: {!soContact.FirstName}&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>DisplayText_LastName_0</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Last Name: {!soContact.LastName}&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>DisplayText_TeamName_0</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Team Name: {!soMember.SR_Team_Name__c}&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Display_Spacer2_0</name>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Screen_Total_Young_People_Digital</name>
-            <dataType>Number</dataType>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Total Young People&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>true</isRequired>
-            <scale>0</scale>
-        </fields>
-        <fields>
-            <name>Screen_TotalItems_Digital</name>
-            <dataType>Number</dataType>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Total Items&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>true</isRequired>
-            <scale>0</scale>
-        </fields>
-        <fields>
-            <name>Display_Spacer1_0</name>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Result_History_0</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;{!varSRResultHistory}&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <name>Screen_Select_Contact</name>
+            <choiceReferences>Teams</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Team&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>Screen_Challenge_Physical</name>
-        <label>Challenge Physical</label>
-        <locationX>1281</locationX>
-        <locationY>1175</locationY>
+        <name>Screen_Challenge</name>
+        <label>Challenge Info</label>
+        <locationX>991</locationX>
+        <locationY>802</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Set_Physical_Results</targetReference>
+            <targetReference>Valid_Results</targetReference>
         </connector>
         <fields>
             <name>WelcomeText</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;_serif&quot; STYLE=&quot;font-size:28px&quot; COLOR=&quot;#006666&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;&lt;B&gt;Please enter your team&amp;apos;s details!&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;_serif&quot; STYLE=&quot;font-size:28px&quot; COLOR=&quot;#0B7577&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Please enter your team&amp;apos;s details!&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
             <name>DisplayText_Message100</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Please input the number of participants and pieces of art {!soMember.SR_Team_Name__c} made for the {!soCampaign.Name}.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Below you&amp;apos;ll input the total number of items and total number of young people who participated on your team in the {!soCampaign.Name}.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
             <name>DisplayText_Message101</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Returning to this page to submit additional items? View your submission history below and please make sure subsequent submissions contain only the new&lt;I&gt; &lt;/I&gt;numbers of participants and pieces of art as totals are cumulative.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;If you&amp;apos;re returning to this page to submit additional items, please make sure the total includes all items you&amp;apos;ve created for this Challenge.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1419,56 +1162,42 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>Display_Spacer1</name>
+            <name>DisplayText_ErrorMessage</name>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:12px&quot; COLOR=&quot;#FF0000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;{!varErrorResults}&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>Screen_Total_Young_People_Physical</name>
+            <name>Screen_TotalItems</name>
             <dataType>Number</dataType>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Total Young People&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>true</isRequired>
-            <scale>0</scale>
-        </fields>
-        <fields>
-            <name>Screen_TotalItems_Physical</name>
-            <dataType>Number</dataType>
+            <defaultValue>
+                <elementReference>soMember.SR_Number_of_Items__c</elementReference>
+            </defaultValue>
             <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Total Items&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
             <scale>0</scale>
         </fields>
         <fields>
-            <name>Display_Spacer2</name>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Result_History</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;{!varSRResultHistory}&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <name>Screen_Total_Young_People</name>
+            <dataType>Number</dataType>
+            <defaultValue>
+                <elementReference>soMember.SR_Number_of_Young_People__c</elementReference>
+            </defaultValue>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Total Young People&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>0</scale>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
     <startElementReference>Flow_Id</startElementReference>
     <textTemplates>
-        <name>textResultHistoryStart</name>
-        <text>Result History&lt;br&gt;</text>
-    </textTemplates>
-    <textTemplates>
         <name>ttPDFFormData</name>
-        <text>Hi {!soContact.FirstName},
+        <text>Thanks for submitting your final numbers to Students Rebuild!
+We&apos;re so grateful you and your team took part in the {!soCampaign.Name}. 
 
-We’re so grateful that you and your team took part in the {!soCampaign.Name}
-and can’t wait to receive your package of art. It typically takes
-about 3-4 weeks to receive and process each package,
-but you can expect another message from us when we receive your art.
-
-Be sure to celebrate your team&apos;s hard work! A Participation Certificate
-is available for you to share with your team.
-You can also continue to utilize the Ocean Challenge learning resources
-and, if you&apos;d like, create additional sea creatures for submission
-all the way up until the Challenge ends on June 8, 2019.
+We&apos;re excited to see your self-portraits arrive in the mail or receive the digital images by May 4, 2018!
 
 Please include this PDF copy of your submission slip if you&apos;re mailing
 your items to Students Rebuild at: 
@@ -1479,17 +1208,13 @@ Seattle, WA 98134
 
 Thanks again!
 
-Submit Date: {!$Flow.CurrentDate}
-Number of Items: {!soResult.SR_Number_of_Items__c}
-Number of Young People: {!soResult.SR_Number_of_Young_People__c}
-
 Unique Id for your mail package: {!soMember.Id}
 {!soContact.FirstName} {!soContact.LastName}
-Email: {!soMember.Email}
+{!soMember.Email} 
 Team: {!soMember.SR_Team_Name__c}
-Organization: {!soMember.CompanyOrAccount} 
-Total Items: {!soMember.SR_Number_of_Items__c}
-Total Young People: {!soMember.SR_Number_of_Young_People__c}</text>
+Organization: {!soOrganization.Name}
+Total Items: {!Screen_TotalItems}
+Total Participants: {!Screen_Total_Young_People}</text>
     </textTemplates>
     <variables>
         <name>soCampaign</name>
@@ -1540,28 +1265,12 @@ Total Young People: {!soMember.SR_Number_of_Young_People__c}</text>
         <objectType>Account</objectType>
     </variables>
     <variables>
-        <name>soResult</name>
-        <dataType>SObject</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <objectType>SR_Result__c</objectType>
-    </variables>
-    <variables>
         <name>soSRResultHistory</name>
         <dataType>SObject</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>SR_Result_Old__History</objectType>
-    </variables>
-    <variables>
-        <name>soTeamResults</name>
-        <dataType>SObject</dataType>
-        <isCollection>true</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <objectType>SR_Result__c</objectType>
     </variables>
     <variables>
         <name>varErrorResults</name>
@@ -1588,7 +1297,7 @@ Total Young People: {!soMember.SR_Number_of_Young_People__c}</text>
         <isInput>true</isInput>
         <isOutput>false</isOutput>
         <value>
-            <stringValue>7010G000001VK2U</stringValue>
+            <stringValue>7010G000000z3QV</stringValue>
         </value>
     </variables>
     <variables>
@@ -1668,13 +1377,6 @@ dboyceman@hotmail.com: 003c000000rX6QmAAK</description>
         </value>
     </variables>
     <variables>
-        <name>varReturnPath</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
         <name>varSRResultHistory</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
@@ -1690,13 +1392,6 @@ dboyceman@hotmail.com: 003c000000rX6QmAAK</description>
     </variables>
     <variables>
         <name>varTaskDescription</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>varTeamId</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
