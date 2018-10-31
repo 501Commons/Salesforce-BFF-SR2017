@@ -3,7 +3,6 @@
     <fullName>C501_SR_2017</fullName>
     <types>
         <members>SR_FlowController</members>
-        <members>SR_PDFController</members>
         <name>ApexClass</name>
     </types>
     <types>

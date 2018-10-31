@@ -55,23 +55,23 @@
           width: 100%;
           height: 100%;
           position: absolute;
-          top: 310px;
-          left: 50px;
+          top: 20px;
+          left: 15px;
         }
                 
     </style>
-   
+
     <div id="container">
       <div id="bottom">
             <flow:interview name="Submission" interview="{!myflow}"/>
       </div>
       <div id="top">
         <apex:form >
-            <apex:commandLink action="{!finishedPage}" value="Print PDF" id="PrintToPDF" style="display:none;font-size:xx-large;font-weight:bold;color:#0b7577;"/>
+            <apex:commandLink action="/SR_SubmissionFinished?id={!OutputMemberId}" value="Print PDF" id="PrintToPDF" style="display:none;font-size:xx-large;font-weight:bold;color:#0b7577;"/>
         </apex:form>
       </div>
     </div>
-       
+   
     <script type="text/javascript">
     
         function CheckFields()

@@ -1,11 +1,11 @@
-<apex:page id="SR_SubmissionFinished" controller="SR_PDFController"
+<apex:page id="SR_SubmissionFinished" standardController="CampaignMember"
      renderAs="pdf" showHeader="false">
 
     <apex:form >
         <apex:pageBlock >
             <apex:pageBlockSection >
                 <apex:outputPanel style="white-space: pre;" layout="block">
-                    <apex:outputText value="{!formDataPDF}"/>
+                    <apex:outputText value="{!CampaignMember.SR_PDF_FormData__c}"/>
                 </apex:outputpanel>
             </apex:pageBlockSection>
         </apex:pageBlock>

@@ -1,54 +1,35 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#CCCCCC; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal"><span style="font-size:
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size:
 12.0pt;font-family:&quot;Calibri Light&quot;,sans-serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
 mso-bidi-font-family:&quot;Calibri Light&quot;;color:#404040">Hi
-{!CampaignMember.FirstName},</span></p>
-
-<p class="MsoNormal"><span style="font-size:
-12.0pt;font-family:&quot;Calibri Light&quot;,sans-serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
-mso-bidi-font-family:&quot;Calibri Light&quot;;color:#404040">Welcome Back to Students
-Rebuild!&nbsp;</span></p>
-
-<p class="MsoNormal"><span style="font-size:
-12.0pt;font-family:&quot;Calibri Light&quot;,sans-serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
-mso-bidi-font-family:&quot;Calibri Light&quot;;color:#404040">Thanks for signing up for
+{!CampaignMember.FirstName},</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="color: rgb(64, 64, 64); font-family: &quot;Calibri Light&quot;, sans-serif; font-size: 12pt;">Welcome Back to Students
+Rebuild!&nbsp;</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="color: rgb(64, 64, 64); font-family: &quot;Calibri Light&quot;, sans-serif; font-size: 12pt;">Thanks for signing up for
 the Ocean Challenge. As you may know, this is more than an art project, it’s a
 global community—so we're glad you're back.</span></p>
 
-<p class="MsoNormal"><span style="font-size:
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size:
 12.0pt;font-family:&quot;Calibri Light&quot;,sans-serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
 mso-bidi-font-family:&quot;Calibri Light&quot;;color:#404040">You'll find&nbsp;everything
 you need to dive into our new Ocean Challenge on our&nbsp;<span style="color: rgb(64, 64, 64); text-decoration-line: none;"><a href="http://www.studentsrebuild.org/resources">Resource Page</a></span>. From our
 Leader Guide&nbsp;with in-depth Challenge details,&nbsp;to new&nbsp;Teaching
 Guides based on the time you have, to special videos—we've created all these
-tools with you in mind.</span></p>
+tools with you in mind.</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="color: rgb(64, 64, 64); font-family: &quot;Calibri Light&quot;, sans-serif; font-size: 12pt;">Have a
+question about the Challenge?&nbsp;</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; vertical-align: baseline;"><span style="color: rgb(64, 64, 64); font-family: &quot;Calibri Light&quot;, sans-serif; font-size: 12pt;">Find the answer&nbsp;</span><span style="color: rgb(64, 64, 64); font-family: &quot;Calibri Light&quot;, sans-serif; font-size: 12pt;"><a href="http://www.studentsrebuild.org/ocean-faq">here</a></span><span style="color: rgb(64, 64, 64); font-family: &quot;Calibri Light&quot;, sans-serif; font-size: 12pt;">&nbsp;or&nbsp;</span><span style="color: rgb(64, 64, 64); font-family: &quot;Calibri Light&quot;, sans-serif; font-size: 12pt;"><a href="mailto:info@studentsrebuild.org">email us</a></span><span style="color: rgb(64, 64, 64); font-family: &quot;Calibri Light&quot;, sans-serif; font-size: 12pt;">.</span></p>
 
-<p class="MsoNormal" style="mso-line-height-alt:11.75pt;vertical-align:baseline"><span style="font-size:12.0pt;font-family:&quot;Calibri Light&quot;,sans-serif;mso-fareast-font-family:
-&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Calibri Light&quot;;color:#404040">Have a
-question about the Challenge? Find the answer&nbsp;<span style="color: rgb(64, 64, 64); text-decoration-line: none;"><a href="http://www.studentsrebuild.org/ocean-faq">here</a></span>&nbsp;or&nbsp;<span style="color: rgb(64, 64, 64); text-decoration-line: none;"><a href="mailto:info@studentsrebuild.org">email us</a></span>.</span></p>
-
-<p class="MsoNormal" style="mso-line-height-alt:11.75pt;vertical-align:baseline"><span style="font-size:12.0pt;font-family:&quot;Calibri Light&quot;,sans-serif;mso-fareast-font-family:
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; vertical-align: baseline;"><span style="font-size:12.0pt;font-family:&quot;Calibri Light&quot;,sans-serif;mso-fareast-font-family:
 &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Calibri Light&quot;;color:#404040">Don't
 forget to share photos of the sea creatures you make on social media
-using&nbsp;#SROCEAN&nbsp;(and make sure to tag @StudentsRebuild)!</span></p>
-
-<p class="MsoNormal" style="mso-line-height-alt:11.75pt;vertical-align:baseline"><span style="font-size:12.0pt;font-family:&quot;Calibri Light&quot;,sans-serif;mso-fareast-font-family:
-&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Calibri Light&quot;;color:#404040">We are so
+using&nbsp;#SROCEAN&nbsp;(and make sure to tag @StudentsRebuild)!</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; vertical-align: baseline;"><span style="color: rgb(64, 64, 64); font-family: &quot;Calibri Light&quot;, sans-serif; font-size: 12pt;">We are so
 happy you've joined us again.</span></p>
 
-<p class="MsoNormal" style="mso-line-height-alt:11.75pt;vertical-align:baseline"><span style="font-size:12.0pt;font-family:&quot;Calibri Light&quot;,sans-serif;mso-fareast-font-family:
-&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Calibri Light&quot;;color:#404040">The
-Students Rebuild Team</span></p><p class="MsoNormal" style="mso-line-height-alt:11.75pt;vertical-align:baseline"><span style="font-size:12.0pt;font-family:&quot;Calibri Light&quot;,sans-serif;mso-fareast-font-family:
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; vertical-align: baseline;"><span style="color: rgb(64, 64, 64); font-family: &quot;Calibri Light&quot;, sans-serif; font-size: 12pt;">The
+Students Rebuild Team</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; vertical-align: baseline;"><span style="font-size:12.0pt;font-family:&quot;Calibri Light&quot;,sans-serif;mso-fareast-font-family:
 &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Calibri Light&quot;;color:#404040"><br></span></p>
 
-<p class="MsoNormal" style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; vertical-align: baseline;"><span style="font-size: 12pt; line-height: 107%; font-family: &quot;Calibri Light&quot;, sans-serif; color: rgb(64, 64, 64); background-color: rgb(204, 204, 204);">Registration Form Details<o:p></o:p></span></p>
+<p class="MsoNormal" style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; vertical-align: baseline;"><span style="line-height: 107%;"><font color="#333333"><u style="font-family: &quot;Calibri Light&quot;, sans-serif; font-size: 12pt;"><span style="background-color: rgb(255, 255, 255);">Registration Form Details<br></span></u><font face="Calibri Light, sans-serif" style=""><span style="background-color: rgb(255, 255, 255);">{!CampaignMember.SR_FormData__c}</span></font></font></span></p>
 
-<span style="background-color: rgb(204, 204, 204);"><u1:p></u1:p>
-
-</span><p class="MsoNormal" style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><span style="font-size: 12pt; line-height: 107%; font-family: &quot;Calibri Light&quot;, sans-serif; color: rgb(64, 64, 64);"><span style="background-color: rgb(204, 204, 204);">{!CampaignMember.SR_FormData__c}</span><span style="background-color: white;"><o:p></o:p></span></span></p>
-
-<u1:p></u1:p>]]></td>
+<font face="arial" style="color: rgb(0, 0, 0);"><span style="font-size: 12pt;"><u1:p></u1:p></span></font>]]></td>
 </tr>
 </table>
