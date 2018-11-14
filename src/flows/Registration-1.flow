@@ -149,6 +149,34 @@
                 <booleanValue>false</booleanValue>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>soMember.SR_Postal_Code__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>soMember.Team_Leader_Age__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>soMember.SR_Role__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>soMember.SR_RoleList__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Screen_Challenge</targetReference>
         </connector>
@@ -284,18 +312,6 @@
             <targetReference>Logging_0</targetReference>
         </connector>
     </assignments>
-    <choices>
-        <name>testing</name>
-        <choiceText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:12px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Choice1&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:12px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Choice2&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:12px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Choice3&lt;/FONT&gt;&lt;/DIV&gt;</choiceText>
-        <dataType>String</dataType>
-        <userInput>
-            <isRequired>false</isRequired>
-            <promptText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:12px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Label1&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:12px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Label2&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:12px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Label3&lt;/FONT&gt;&lt;/DIV&gt;</promptText>
-        </userInput>
-        <value>
-            <elementReference>soMember.SR_Country__c</elementReference>
-        </value>
-    </choices>
     <constants>
         <name>constLine</name>
         <dataType>String</dataType>
@@ -303,6 +319,38 @@
             <stringValue>__________________________________________________</stringValue>
         </value>
     </constants>
+    <decisions>
+        <name>Check_Age</name>
+        <label>Check Age</label>
+        <locationX>1037</locationX>
+        <locationY>799</locationY>
+        <defaultConnector>
+            <targetReference>Screen_Age_Restriction</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Valid_Age</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Screen_TeamLeader_Age</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>12 and Under</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Screen_TeamLeader_Age</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>-- Select Option --</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Lookup_Org</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
     <decisions>
         <name>Check_Overrides</name>
         <label>Use Overrides</label>
@@ -356,31 +404,6 @@
             </conditions>
             <connector>
                 <targetReference>Get_Contact_EmailVerified</targetReference>
-            </connector>
-            <label>Yes</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <name>Create_New_Team_Checked</name>
-        <label>Create New Team</label>
-        <locationX>1440</locationX>
-        <locationY>436</locationY>
-        <defaultConnector>
-            <targetReference>Lookup_Org_0</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>No</defaultConnectorLabel>
-        <rules>
-            <name>Yes_CreateNewContact_Checked</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Screen_Create_New_Team</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Clear_Team_Info</targetReference>
             </connector>
             <label>Yes</label>
         </rules>
@@ -488,12 +511,12 @@
     <decisions>
         <name>Existing_Contact_Check</name>
         <label>Existing Contact Unique</label>
-        <locationX>1405</locationX>
+        <locationX>1406</locationX>
         <locationY>866</locationY>
         <defaultConnector>
             <targetReference>Create_Contact</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>[Default Outcome]</defaultConnectorLabel>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
             <name>Yes_ExistingContactCheck</name>
             <conditionLogic>and</conditionLogic>
@@ -687,7 +710,7 @@ This comes in w/ varInputCampaignId set to
             <label>Yes</label>
         </rules>
     </decisions>
-    <description>Kasey: Updated finished screens for Ocean Challenge</description>
+    <description>Kasey: Copy fix intro screen</description>
     <dynamicChoiceSets>
         <name>Countries</name>
         <dataType>Picklist</dataType>
@@ -709,7 +732,7 @@ This comes in w/ varInputCampaignId set to
         <dataType>Picklist</dataType>
         <displayField xsi:nil="true"/>
         <object xsi:nil="true"/>
-        <picklistField>Org_Type__c</picklistField>
+        <picklistField>C501_Students_Rebuild_Org_Type__c</picklistField>
         <picklistObject>Account</picklistObject>
     </dynamicChoiceSets>
     <dynamicChoiceSets>
@@ -717,7 +740,7 @@ This comes in w/ varInputCampaignId set to
         <dataType>Picklist</dataType>
         <displayField xsi:nil="true"/>
         <object xsi:nil="true"/>
-        <picklistField>Org_Sub_Type__c</picklistField>
+        <picklistField>C501_Students_Rebuild_Org_Sub_Type__c</picklistField>
         <picklistObject>Account</picklistObject>
     </dynamicChoiceSets>
     <dynamicChoiceSets>
@@ -734,6 +757,14 @@ This comes in w/ varInputCampaignId set to
         <displayField xsi:nil="true"/>
         <object xsi:nil="true"/>
         <picklistField>SR_State_Province__c</picklistField>
+        <picklistObject>CampaignMember</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>TeamLeader_Age_Picklist</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Team_Leader_Age__c</picklistField>
         <picklistObject>CampaignMember</picklistObject>
     </dynamicChoiceSets>
     <dynamicChoiceSets>
@@ -808,6 +839,10 @@ This comes in w/ varInputCampaignId set to
             <field>SR_Opt_Out_Newsletter__c</field>
         </outputAssignments>
         <outputAssignments>
+            <assignToReference>soMember.SR_Postal_Code__c</assignToReference>
+            <field>SR_Postal_Code__c</field>
+        </outputAssignments>
+        <outputAssignments>
             <assignToReference>soMember.SR_RoleList__c</assignToReference>
             <field>SR_RoleList__c</field>
         </outputAssignments>
@@ -819,6 +854,14 @@ This comes in w/ varInputCampaignId set to
             <assignToReference>soMember.SR_Team_Name__c</assignToReference>
             <field>SR_Team_Name__c</field>
         </outputAssignments>
+        <outputAssignments>
+            <assignToReference>soMember.Taken_Students_Rebuild_Challenge_Before__c</assignToReference>
+            <field>Taken_Students_Rebuild_Challenge_Before__c</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>soMember.Team_Leader_Age__c</assignToReference>
+            <field>Team_Leader_Age__c</field>
+        </outputAssignments>
         <sortField>SR_Team_Name__c</sortField>
         <sortOrder>Asc</sortOrder>
         <valueField>Id</valueField>
@@ -826,15 +869,10 @@ This comes in w/ varInputCampaignId set to
     <formulas>
         <name>BuildFormData</name>
         <dataType>String</dataType>
-        <expression>{!Screen_FirstName} + &quot;, &quot; + {!Screen_LastName} + &quot;&lt;br&gt;&quot; +
+        <expression>{!Screen_FirstName} + &quot; &quot; + {!Screen_LastName} + &quot;&lt;br&gt;&quot; +
 {!Screen_Email_Register} + &quot;&lt;br&gt;&quot; +
 &quot;Team: &quot; + {!Screen_Team} + &quot;&lt;br&gt;&quot; +
-&quot;Organization: &quot; + {!Screen_Organization_Name} + &quot;&lt;br&gt;&quot; +
-IF({!Screen_X0_5_years_old}, &quot;0 - 5 years old&quot; + &quot;&lt;br&gt;&quot;, &quot;&quot;) + 
-IF({!Screen_X6_11_years_old}, &quot;6 - 11 years old&quot; + &quot;&lt;br&gt;&quot;, &quot;&quot;) +
-IF({!Screen_X12_14_years_old}, &quot;12 - 14 years old&quot; + &quot;&lt;br&gt;&quot;, &quot;&quot;) +
-IF({!Screen_X15_17_years_old}, &quot;15 - 17 years old&quot; + &quot;&lt;br&gt;&quot;, &quot;&quot;) +
-IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, &quot;&quot;)</expression>
+&quot;Organization: &quot; + {!Screen_Organization_Name} + &quot;&lt;br&gt;&quot;</expression>
     </formulas>
     <formulas>
         <name>BuildFormDataForObject</name>
@@ -845,6 +883,26 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
         <name>FlowMessage</name>
         <dataType>String</dataType>
         <expression>TEXT({!varFlowId}) + &quot; &quot; + {!Screen_Email_Register} + &quot; Flow Registration&quot;</expression>
+    </formulas>
+    <formulas>
+        <name>getHearAboutOther</name>
+        <dataType>String</dataType>
+        <expression>if ({!soMember.Hear_About_Other__c} = &quot;&quot;, &quot;-- Specify Other --&quot;, {!soMember.Hear_About_Other__c})</expression>
+    </formulas>
+    <formulas>
+        <name>getLeaderRoleOther</name>
+        <dataType>String</dataType>
+        <expression>if ({!soMember.SR_Role__c} = &quot;&quot;, &quot;-- Specify Other --&quot;, {!soMember.SR_Role__c})</expression>
+    </formulas>
+    <formulas>
+        <name>getOrgSubTypeOther</name>
+        <dataType>String</dataType>
+        <expression>if ({!soOrganization.Org_Sub_Type_Other__c} = &quot;&quot;, &quot;-- Specify Other --&quot;, {!soOrganization.Org_Sub_Type_Other__c})</expression>
+    </formulas>
+    <formulas>
+        <name>getOrgTypeOther</name>
+        <dataType>String</dataType>
+        <expression>if ({!soOrganization.Org_Type_Other__c} = &quot;&quot;, &quot;-- Specify Other --&quot;, {!soOrganization.Org_Type_Other__c})</expression>
     </formulas>
     <formulas>
         <description>Check for possible SQL Injection Attempt on malformed input params</description>
@@ -1062,6 +1120,18 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <field>BillingState</field>
             <value>
                 <elementReference>Screen_StateProvince</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>C501_Students_Rebuild_Org_Sub_Type__c</field>
+            <value>
+                <elementReference>Screen_OrgSubType</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>C501_Students_Rebuild_Org_Type__c</field>
+            <value>
+                <elementReference>Screen_Organization_Type</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -1332,6 +1402,22 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <assignToReference>soOrganization.Name</assignToReference>
             <field>Name</field>
         </outputAssignments>
+        <outputAssignments>
+            <assignToReference>soOrganization.Org_Sub_Type_Other__c</assignToReference>
+            <field>Org_Sub_Type_Other__c</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>soOrganization.Org_Sub_Type__c</assignToReference>
+            <field>Org_Sub_Type__c</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>soOrganization.Org_Type_Other__c</assignToReference>
+            <field>Org_Type_Other__c</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>soOrganization.Org_Type__c</assignToReference>
+            <field>Org_Type__c</field>
+        </outputAssignments>
     </recordLookups>
     <recordLookups>
         <name>Search_Existing_Members</name>
@@ -1521,6 +1607,12 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             </value>
         </inputAssignments>
         <inputAssignments>
+            <field>SR_Postal_Code__c</field>
+            <value>
+                <elementReference>Screen_PostalCode</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>SR_RoleList__c</field>
             <value>
                 <elementReference>Screen_Role</elementReference>
@@ -1541,7 +1633,13 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
         <inputAssignments>
             <field>Taken_Students_Rebuild_Challenge_Before__c</field>
             <value>
-                <elementReference>varTakenPreviousChallenge</elementReference>
+                <elementReference>Screen_Taken_Challenge_Before</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Team_Leader_Age__c</field>
+            <value>
+                <elementReference>Screen_TeamLeader_Age</elementReference>
             </value>
         </inputAssignments>
         <object>CampaignMember</object>
@@ -1589,8 +1687,16 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
+            <name>Email_Spacer_1</name>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
             <name>Welcome_Message2</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Welcome to the Students Rebuild &lt;FONT COLOR=&quot;#0B7577&quot;&gt;&lt;B&gt;{!soCampaign.Name} &lt;/B&gt;&lt;/FONT&gt;registration form.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Welcome to the &lt;FONT COLOR=&quot;#0B7577&quot;&gt;&lt;B&gt;{!soCampaign.Name} &lt;/B&gt;&lt;/FONT&gt;registration form.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Email_Spacer_2</name>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1599,13 +1705,25 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
+            <name>Email_Spacer_3</name>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
             <name>Display_Message5</name>
             <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;There are no limits to team size&lt;FONT STYLE=&quot;font-size:14px&quot;&gt;—&lt;/FONT&gt;teams can be one person or as many as you’d like. And you don’t have to be at a school to participate!&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
+            <name>Email_Spacer_4</name>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
             <name>Welcome_Message4</name>
             <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Have a question? Please &lt;A HREF=&quot;info@studentsrebuild.org&quot; TARGET=&quot;_blank&quot;&gt;contact us&lt;/A&gt;.&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Email_Spacer_5</name>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1683,8 +1801,16 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
+            <name>Existing_Spacer_1</name>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
             <name>DisplayText_Message1_Existing</name>
             <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Welcome back and thank you for registering for the &lt;FONT COLOR=&quot;#0B7577&quot; KERNING=&quot;1&quot;&gt;{!soCampaign.Name}&lt;/FONT&gt;. Now, it’s time to take action!&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Existing_Spacer_2</name>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1693,13 +1819,25 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
+            <name>Existing_Spacer_3</name>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
             <name>DisplayText_Message3_Existing</name>
             <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Look out for a registration confirmation from us. If you don&amp;apos;t see an email, please double-check that it didn&amp;apos;t go to your junk folder.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
+            <name>Existing_Spacer_4</name>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
             <name>DisplayText_Message6_Existing</name>
             <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Have a question about the Challenge? Find the answer &lt;A HREF=&quot;http://www.studentsrebuild.org/ocean-faq&quot; TARGET=&quot;_blank&quot;&gt;here&lt;/A&gt; or &lt;A HREF=&quot;mailto:info@studentsrebuild.org&quot; TARGET=&quot;_blank&quot;&gt;email us&lt;/A&gt;.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Existing_Spacer_5</name>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1724,8 +1862,16 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
+            <name>New_Spacer_1</name>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
             <name>DisplayText_Message1_New</name>
             <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Thanks for registering for the &lt;FONT COLOR=&quot;#0B7577&quot; KERNING=&quot;1&quot;&gt;{!soCampaign.Name} &lt;/FONT&gt;and joining our global community. Now, it’s time to take action!&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>New_Spacer_2</name>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1734,13 +1880,25 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
+            <name>New_Spacer_3</name>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
             <name>DisplayText_Message3_New</name>
             <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Look out for a registration confirmation from us. If you don&amp;apos;t see an email, please double-check that it didn&amp;apos;t go to your junk folder.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
+            <name>New_Spacer_4</name>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
             <name>DisplayText_Message6_New</name>
             <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Have a question about the Challenge? Find the answer &lt;A HREF=&quot;http://studentsrebuild.org/ocean-faq&quot; TARGET=&quot;_blank&quot;&gt;here&lt;/A&gt; or &lt;A HREF=&quot;mailto:info@studentsrebuild.org&quot; TARGET=&quot;_blank&quot;&gt;email us&lt;/A&gt;.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>New_Spacer_5</name>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1760,7 +1918,7 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Create_New_Team_Checked</targetReference>
+            <targetReference>Lookup_Org_0</targetReference>
         </connector>
         <fields>
             <name>DisplayMessage_Hi</name>
@@ -1768,8 +1926,16 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
+            <name>Team_Spacer_1</name>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
             <name>Display_Message2</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Looks like you’ve already registered a team for the &lt;FONT COLOR=&quot;#0B7577&quot; KERNING=&quot;1&quot;&gt;{!soCampaign.Name}&lt;/FONT&gt;! Select an existing team to make any updates to your information or check the box to create a new team.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Looks like you’ve already registered a team for the &lt;FONT COLOR=&quot;#0B7577&quot; KERNING=&quot;1&quot;&gt;{!soCampaign.Name}&lt;/FONT&gt;! Select Next to make any updates to your information.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Team_Spacer_2</name>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1780,15 +1946,24 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <fieldType>DropdownBox</fieldType>
             <isRequired>false</isRequired>
         </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Screen_Age_Restriction</name>
+        <label>Screen Age Restriction</label>
+        <locationX>863</locationX>
+        <locationY>799</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Screen_Challenge</targetReference>
+        </connector>
         <fields>
-            <name>Screen_Create_New_Team</name>
-            <dataType>Boolean</dataType>
-            <defaultValue>
-                <booleanValue>false</booleanValue>
-            </defaultValue>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Create a New Team&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>true</isRequired>
+            <name>ScreenAgeWarning</name>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Challenges are open for everyone to participate, but you are not eligible to register as a team leader. Please try to find an adult to register as the leader for your team!&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -1802,11 +1977,15 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Lookup_Org</targetReference>
+            <targetReference>Check_Age</targetReference>
         </connector>
         <fields>
             <name>WelcomeText</name>
             <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;_serif&quot; STYLE=&quot;font-size:28px&quot; COLOR=&quot;#0B7577&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;{!varWelcomeMessage}&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>welcome_spacer_1</name>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1835,7 +2014,7 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
         </fields>
         <fields>
             <name>DisplayText_Newsletter</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Yes, add me to the monthly email newsletter list!&lt;FONT STYLE=&quot;font-size:14px&quot;&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Yes, add me to the monthly email newsletter list!&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1843,6 +2022,20 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <dataType>Boolean</dataType>
             <defaultValue>
                 <elementReference>NOT_SR_Opt_Out_Newsletter</elementReference>
+            </defaultValue>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Text_Taken_Challenge</name>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Yes, I have taken a Students Rebuild Challenge before!&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Screen_Taken_Challenge_Before</name>
+            <dataType>Boolean</dataType>
+            <defaultValue>
+                <elementReference>varTakenPreviousChallenge</elementReference>
             </defaultValue>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
@@ -1872,7 +2065,7 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
         </fields>
         <fields>
             <name>TeamNameInfo_0</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#666666&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;I&gt;i.e., Seatle Caring Creatures, Sea Change, Mr. Smith&amp;apos;s 2nd Period Social Studies, etc. Get creative! Your team name is what shows on our interactive team map!&lt;/I&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#666666&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;I&gt;i.e., Seattle Caring Creatures, Sea Change, Mr. Smith&amp;apos;s 2nd Period Social Studies, etc. Get creative! Your team name is what shows on our interactive team map!&lt;/I&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1935,8 +2128,22 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <isRequired>true</isRequired>
         </fields>
         <fields>
-            <name>Empty_Space4</name>
-            <fieldType>DisplayText</fieldType>
+            <name>Screen_Default_Org_Type</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>soOrganization.Org_Type__c</elementReference>
+            </defaultValue>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Screen_Default_Org_Sub_Type</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>soOrganization.Org_Sub_Type__c</elementReference>
+            </defaultValue>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <fields>
             <name>Team_Info2</name>
@@ -1955,16 +2162,16 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <name>Screen_Organization_Type_Other</name>
             <dataType>String</dataType>
             <defaultValue>
-                <stringValue>-- Specify Other --</stringValue>
+                <elementReference>getOrgTypeOther</elementReference>
             </defaultValue>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
         </fields>
         <fields>
-            <name>Screen_OrgSubType</name>
+            <name>Screen_OrgSubTypeTemp</name>
             <choiceReferences>OrgSubTypes</choiceReferences>
             <dataType>String</dataType>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Organization SubType&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Organization SubType&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>false</isRequired>
         </fields>
@@ -1972,7 +2179,7 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <name>Screen_OrgSubType_Other</name>
             <dataType>String</dataType>
             <defaultValue>
-                <stringValue>-- Specify Other --</stringValue>
+                <elementReference>getOrgSubTypeOther</elementReference>
             </defaultValue>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
@@ -2022,14 +2229,32 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <isRequired>true</isRequired>
         </fields>
         <fields>
+            <name>Screen_PostalCode</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>soMember.SR_Postal_Code__c</elementReference>
+            </defaultValue>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Postal Code&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
             <name>Empty_Space6</name>
             <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Screen_TeamLeader_Age</name>
+            <choiceReferences>TeamLeader_Age_Picklist</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Team Leader Age&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <fields>
             <name>Screen_Role</name>
             <choiceReferences>Roles</choiceReferences>
             <dataType>String</dataType>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Role&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;Team Leader Role&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>false</isRequired>
         </fields>
@@ -2037,7 +2262,7 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <name>Screen_Role_Other</name>
             <dataType>String</dataType>
             <defaultValue>
-                <stringValue>-- Specify Other --</stringValue>
+                <elementReference>getLeaderRoleOther</elementReference>
             </defaultValue>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
@@ -2062,9 +2287,17 @@ IF({!Screen_X18_years_old}, &quot;18+ years old&quot; + &quot;&lt;br&gt;&quot;, 
             <name>Screen_HearAbout_Other</name>
             <dataType>String</dataType>
             <defaultValue>
-                <stringValue>-- Specify Other --</stringValue>
+                <elementReference>getHearAboutOther</elementReference>
             </defaultValue>
             <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Screen_OrgSubType</name>
+            <choiceReferences>OrgSubTypes</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldType>DropdownBox</fieldType>
             <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
