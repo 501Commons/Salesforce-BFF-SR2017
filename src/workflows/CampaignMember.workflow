@@ -24,16 +24,4 @@
         <senderType>DefaultWorkflowUser</senderType>
         <template>Students_Rebuild/SR_Registration_New</template>
     </alerts>
-    <alerts>
-        <fullName>SR_Submission</fullName>
-        <ccEmails>info@studentsrebuild.org</ccEmails>
-        <description>SR Submission</description>
-        <protected>false</protected>
-        <recipients>
-            <field>Email</field>
-            <type>email</type>
-        </recipients>
-        <senderType>DefaultWorkflowUser</senderType>
-        <template>Students_Rebuild/SR_Submission</template>
-    </alerts>
 </Workflow>

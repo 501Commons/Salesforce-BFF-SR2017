@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <actionCalls>
-        <name>Email_Verification</name>
-        <label>Email Verification</label>
-        <locationX>1814</locationX>
-        <locationY>880</locationY>
-        <actionName>Contact.Rebuild_New_Registration</actionName>
+        <name>Email_Verify_Alert</name>
+        <label>Email Verify Alert</label>
+        <locationX>1829</locationX>
+        <locationY>868</locationY>
+        <actionName>Contact.SR_Registration_Email_Verification_Alert</actionName>
         <actionType>emailAlert</actionType>
         <connector>
             <targetReference>Existing_Team</targetReference>
@@ -478,7 +478,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Email_Verification</targetReference>
+                <targetReference>Email_Verify_Alert</targetReference>
             </connector>
             <label>Yes</label>
         </rules>
@@ -710,7 +710,7 @@ This comes in w/ varInputCampaignId set to
             <label>Yes</label>
         </rules>
     </decisions>
-    <description>Kasey: Copy fix intro screen</description>
+    <description>DaveB: Update Email Verify Alert</description>
     <dynamicChoiceSets>
         <name>Countries</name>
         <dataType>Picklist</dataType>

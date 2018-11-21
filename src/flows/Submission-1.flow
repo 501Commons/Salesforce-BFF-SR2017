@@ -543,7 +543,7 @@
             <label>Yes</label>
         </rules>
     </decisions>
-    <description>DaveB: Set Email Sent Flags</description>
+    <description>Kasey: Finish page language update</description>
     <dynamicChoiceSets>
         <name>Countries</name>
         <dataType>Picklist</dataType>
@@ -1282,7 +1282,7 @@
         </fields>
         <fields>
             <name>Finished_Message2_0</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;We’re so grateful that you and your team took part in the &lt;FONT COLOR=&quot;#0B7577&quot;&gt;&lt;B&gt;{!soCampaign.Name}&lt;/B&gt;&lt;/FONT&gt; and can’t wait to receive your package of art. It typically takes about 3-4 weeks to receive and process each package, but you can expect another message from us when we receive your art.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;We’re so grateful that you and your team took part in the &lt;FONT COLOR=&quot;#006666&quot;&gt;&lt;B&gt;{!soCampaign.Name}&lt;/B&gt;&lt;/FONT&gt; and can’t wait to receive your package of art. It typically takes about 3-4 weeks to receive and process each package, but you can expect another message from us when we receive your art.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1292,7 +1292,7 @@
         </fields>
         <fields>
             <name>Screen_Physical_End_Info</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Please select the Print PDF button below for a PDF file of your submission to include in your package. You will also receive an email with submission details at {!Screen_Email_Register} in case you need to print them at a later time.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
+            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:16px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;1&quot;&gt;Please select the Print PDF button above for a PDF file of your submission to include in your package. You will also receive an email with submission details at {!Screen_Email_Register} in case you need to print them at a later time.&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>

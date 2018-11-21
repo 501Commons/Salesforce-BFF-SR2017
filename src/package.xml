@@ -46,17 +46,16 @@
     </types>
     <types>
         <members>Students_Rebuild</members>
-        <members>Students_Rebuild/Rebuild_New_Registration_Template</members>
+        <members>Students_Rebuild/SR_Registration_Email_Verification</members>
         <members>Students_Rebuild/SR_Registration_Existing</members>
         <members>Students_Rebuild/SR_Registration_New</members>
-        <members>Students_Rebuild/SR_Submission</members>
         <members>Students_Rebuild/SR_Submission_Digital_Legacy</members>
         <members>Students_Rebuild/SR_Submission_Physical_Legacy</members>
         <name>EmailTemplate</name>
     </types>
     <types>
-        <members>Registration-33</members>
-        <members>Submission-23</members>
+        <members>Registration-1</members>
+        <members>Submission-1</members>
         <name>Flow</name>
     </types>
     <types>
